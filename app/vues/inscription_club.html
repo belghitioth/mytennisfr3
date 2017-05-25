@@ -1,0 +1,64 @@
+ <div ng-controller="MainCtrl" ng-cloak>
+ <md-fab-toolbar md-open="demo.isOpen" count="demo.count"
+                  md-direction="{{demo.selectedDirection}}">
+    <md-fab-trigger class="align-with-text">
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+    
+        <md-button class="md-raised" ng-click="acceuil()" >Accueil
+        </md-button>
+        <md-button class="md-raised" ng-click="club()">Club
+        </md-button>
+         <md-button class="md-raised" ng-click="commencer()">Adhérent
+        </md-button>
+          <md-button class="md-raised md-warn" ng-click="commencer()">Connexion
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
+  </div>
+
+<div class="container" style="padding-top: 20px;">
+			<div class="container-fluid" ng-controller ="inscriptionClubCtrl">
+
+			
+			<h1>Inscription Club </h1>
+			  	
+
+
+					<form  role="form">
+					<div class="input-group">
+
+					<input type="text" class="form-control"   ng-model="club.nom" name="nom"  placeholder="Nom"  required ng-minlength="2" ng-maxlength="20"/>
+					<input type="text" class="form-control" ng-model="club.ville" name="ville"  placeholder="Ville"  ng-maxlength="30" required />  
+					<input type="email" class="form-control" ng-model="club.email" name="email"  placeholder="Email" required />  
+					<input type="password" class="form-control"  ng-model="club.mdp" id="mdp1" name="mdp_club" oninput="checkPasswords()" placeholder="Mot de passe" required /> 	
+					<input type="password" class="form-control"   name="mdp_club2"  id="mdp2" oninput="checkPasswords()" placeholder="Confirmer mot de passe" required /> 				
+						
+					<input class="form-control" type="submit" ng-click="inscrireClub()" value="S'inscrire" />
+
+					</div>
+					</form>
+				<p> {{log }}</p>
+
+
+			
+			</div> </div>
+			<script>
+			function checkPasswords() {
+			  var password1 = document.getElementById('mdp1');
+			  var password2 = document.getElementById('mdp2');
+			  if (password1.value != password2.value) {
+			    password2.setCustomValidity('Les mots de passe ne sont pas identiques');
+			  } else {
+			    password2.setCustomValidity('');
+			  }
+			}
+			</script>
+			
+			

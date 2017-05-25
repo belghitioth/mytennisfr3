@@ -1,0 +1,113 @@
+ <style>
+table, th , td {
+  border: 1px solid grey;
+  padding: 5px;
+}
+
+}
+</style> 
+
+<div ng-cloak>
+  <md-content>
+   <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate> Bonjour {{nom}}</h2>
+
+ 
+
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+  
+    <md-tabs md-dynamic-height md-border-bottom>
+
+      <md-tab label="Gestion des terrains">
+        <md-content class="md-padding">
+  
+         
+   
+      <h2>Nombre de terrains : {{nb_terrains}}</h2>
+          <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
+          <br>
+
+   
+       
+         <table>
+      <tr><td>Nom </td><td> Type </td><td> Action </td><td> Supression </td></tr>
+        <tr ng-repeat="terrain in terrains | filter:searchText"><td> {{ terrain.nom }} </td><td> {{ terrain.type }}  </td>
+        <td><a href="" ng-click="afficherPlanning(terrain.nom)" > Gérer Planning</a></td>
+        <td>  <a href="" ng-click="supprimerTerrain(terrain.nom)"  > Supprimer</a></td>
+        </tr> 
+
+      </table>
+     
+      <h3>Ajouter un terrain </h3>
+       <form name="projectForm">
+
+       <md-input-container class="md-block">
+        <label>Nom</label>
+        <input ng-model= "terrainnew.nom" type="text">
+        <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+           </div>
+      </md-input-container>
+          <md-input-container class="md-block">
+        <label>Type</label>
+        <input ng-model= "terrainnew.type" placeholder="Type ( Ex: Terre Battue)" type="text">
+        <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+          </div>
+      </md-input-container>
+
+       <div>
+        <md-button type="submit" ng-click="ajouterTerrain()">Ajouter terrain</md-button>
+      </div>
+
+     
+    </form>
+ 
+        </md-content>
+      </md-tab>
+      <md-tab label="Gestion des adhérents" >
+        <md-content class="md-padding">
+        <div ng-controller="gestionAdherentsCtrl">
+          <h2 class="md-display-2">Nombre d'adhérents : {{nb_adherents}}</h2>
+          
+          <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
+        <br>
+        <table>
+      <tr><td>Nom </td><td> Prénom </td><td> Année de naissance </td><td> E-mail </td><td>Compte activé</td><td>Action </td><td>Suppression</td></tr>
+        <tr ng-repeat="adherent in adherents | filter:searchText"><td> {{ adherent.nom }} </td><td> {{ adherent.prenom }}  </td><td> {{ adherent.birthday }}  </td><td> {{ adherent.email}}  </td><td> {{ adherent.adherent_active}}  </td>
+        <td ng-show="adherent.adherent_active == 'non'">
+        <a ng-click="activerAdherent(adherent.cid)"  href=""> Activer    
+        </a> </td>
+         <td ng-show="adherent.adherent_active == 'oui'"><a ng-click="desactiverAdherent(adherent.cid)"  href=""> Désactiver     
+         </a> </td>
+         <td><a ng-click="supprimerAdherent(adherent.cid)"  href="">Supprimer</a></td>
+
+             </tr> 
+
+      </table><br>
+    
+       
+        <p> {{log }}</p>
+        </div>
+      
+        </md-content>
+      </md-tab>
+      <md-tab  ng-click="deconnecterClub()" label="Déconnexion">
+       
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
+
+
+			
+		

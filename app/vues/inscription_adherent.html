@@ -1,0 +1,68 @@
+ <div ng-controller="MainCtrl" ng-cloak>
+ <md-fab-toolbar md-open="demo.isOpen" count="demo.count"
+                  md-direction="{{demo.selectedDirection}}">
+    <md-fab-trigger class="align-with-text">
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+    
+        <md-button class="md-raised" ng-click="acceuil()" >Accueil
+        </md-button>
+        <md-button class="md-raised" ng-click="club()">Club
+        </md-button>
+         <md-button class="md-raised" ng-click="commencer()">Adhérent
+        </md-button>
+          <md-button class="md-raised md-warn" ng-click="commencer()">Connexion
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
+  </div>
+
+<div class="container" style="padding-top: 20px;">
+			<div class="container-fluid" ng-controller ="inscriptionAdherentCtrl">
+
+			
+			<h1>Inscription Adherent </h1>
+			  	
+
+
+					<form  role="form">
+					<div class="input-group">
+
+					<select ng-model="adherent.club" ng-options="club.nom as club.nom for club in clubs">
+                          <option value="">Choisir Club</option>
+        </select>
+					<input type="text" class="form-control"   ng-model="adherent.nom" name="nom"  placeholder="Nom"  required ng-minlength="2" ng-maxlength="20"/>
+					<input type="text" class="form-control" ng-model="adherent.prenom" name="prenom"  placeholder="Prenom"  ng-maxlength="30" required />  
+					<input type="email" class="form-control" ng-model="adherent.email" name="email"  placeholder="Email" required />  
+					<input type="password" class="form-control"  ng-model="adherent.mdp" id="mdp1" name="mdp_adherent" oninput="checkPasswords()" placeholder="Mot de passe" required /> 	
+					<input type="password" class="form-control"   name="mdp_adherent2"  id="mdp2" oninput="checkPasswords()" placeholder="Confirmer mot de passe" required />
+					<input type="text" class="form-control"   ng-model="adherent.birthday" name="birthday"  placeholder="Année de naissance"  required ng-minlength="4" ng-maxlength="30"/>			
+						
+					<input class="form-control" type="submit" ng-click="inscrireAdherent()" value="S'inscrire" />
+
+					</div>
+					</form>
+				
+
+
+			
+			</div> </div>
+			<script>
+			function checkPasswords() {
+			  var password1 = document.getElementById('mdp1');
+			  var password2 = document.getElementById('mdp2');
+			  if (password1.value != password2.value) {
+			    password2.setCustomValidity('Les mots de passe ne sont pas identiques');
+			  } else {
+			    password2.setCustomValidity('');
+			  }
+			}
+			</script>
+			
+			

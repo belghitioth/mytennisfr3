@@ -1,0 +1,139 @@
+ <style>
+table, th , td {
+  border: 1px solid grey;
+  padding: 5px;
+}
+
+}
+</style> 
+
+<div ng-cloak>
+  <md-content>
+   <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate> Bonjour {{prenom}}</h2>
+
+ 
+
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+  
+    <md-tabs md-dynamic-height md-border-bottom>
+     <md-tab label="Réserver">
+        <md-content class="md-padding">
+        <div class="container-fluid" ng-controller="accueilAdherentCtrl">
+
+    <h3>Réserver mon terrain ({{nomClub}}) : </h3>
+
+       <form name="projectForm">
+
+         <md-input-container>
+          <label>Choisir Terrain</label>
+          <md-select  ng-model="creneau.terrain" >
+            <md-option ng-repeat="terrain in terrains" ng-value="terrain.nom" >
+              {{terrain.nom}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+
+         <md-input-container>
+          <label>Choisir Partenaire</label>
+          <md-select   ng-model="creneau.partenaire" >
+            <md-option ng-repeat="adherent in adherents" ng-value="adherent.nom+' '+adherent.prenom " >
+              {{adherent.nom}} {{adherent.prenom}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+   
+<md-input-container class="md-block">
+        <label>Début du créneau</label>
+        <input ng-model="creneau.start" type="text"  placeholder=" (Ex : AAAA,MM,JJ,hh,mm ) ">
+        <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+           </div>
+      </md-input-container>
+       
+    
+
+       <div>
+        <md-button type="submit" ng-click="reserver()" >Je réserve !</md-button>
+      </div>
+
+     
+    </form>
+     <p> {{message }}</p>
+
+     </div> 
+  
+         
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Mes Réservations">
+        <md-content class="md-padding">
+  
+          
+      
+   
+        <div class="container-fluid" ng-controller="reservationsAdherentCtrl">
+        <h2>Réservations</h2>
+          <input type="text"  class="form-control" placeholder="Filtrer ..." ng-model="searchText2">
+          <br>
+
+
+      
+        <table>
+      <tr><td>Intitulé </td><td> Début </td><td> Fin </td><td> Terrain </td> </tr>
+       <tr ng-repeat="creneau in creneaux " ><td> {{ creneau.intitule}} </td><td> {{ creneau.start }}  </td><td> {{ creneau.end }}  </td><td> {{creneau.terrain_nom}} </tr> 
+
+      </table>
+      
+  </div> 
+  
+  
+ 
+        </md-content>
+      </md-tab>
+      <md-tab label="Mes informations" >
+        <md-content class="md-padding">
+          <div class="container-fluid" ng-controller="informationsAdherentCtrl">
+
+   
+        <table>
+      <tr><td>Nom </td><td> {{infos.nom}} </td></tr>
+      <tr><td> Prénom </td><td>{{infos.prenom}}</td></tr>
+      <tr><td> Date de naissance </td><td>{{infos.birthday}}</td></tr>
+      <tr><td> Mot de passe </td><td> ************</td></tr>
+
+
+
+      </table>
+        
+    <form  >
+     <div>
+        <md-button type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
+      </div>
+      
+    </form>
+
+
+  </div> 
+     
+        </md-content>
+      </md-tab>
+      <md-tab  ng-click="deconnecterAdherent()" label="Déconnexion">
+       
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
+

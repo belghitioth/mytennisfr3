@@ -1,0 +1,38 @@
+<!-- Header -->
+        <header id="header">
+          <h1 id="logo"><a href="">Interface Administrateur</a></h1>
+          <nav id="nav">
+            <ul>
+              <li><a  href="">Gestion des Clubs</a></li>
+              <li>
+                <a href="">Gestion des adhérents</a>
+                
+              </li>
+        
+              <li> <a href="" ng-click="deconnecterAdmin()" class="button special">Déconnexion</a></li>
+            </ul>
+        
+          </nav>
+       </header>
+		 <section id="banner2"> </section>
+
+			<div class="container" style="padding-top: 20px;">
+		
+			<h1>Nombre de clubs : {{nb_clubs}}</h1>
+			<input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
+
+			<table>
+			<tr><td>Nom </td><td> Club activé </td><td> Action </td></tr>
+  			<tr ng-repeat="club in filteredClubs | filter:searchText"><td> {{ club.nom }} </td><td> {{ club.club_active }}	</td><td ng-show="club.club_active == 'non'">
+  			<a ng-click="activerClub(club.cid)"  href=""> Activer
+               
+            </a> </td><td ng-show="club.club_active == 'oui'"><a ng-click="desactiverClub(club.cid)"  href=""> Désactiver
+               
+            </a> </td></tr> 
+
+			</table>
+
+        
+			
+			
+			</div>

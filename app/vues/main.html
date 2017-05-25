@@ -1,0 +1,49 @@
+ <div ng-controller="MainCtrl" ng-cloak>
+
+ <md-fab-toolbar md-open="demo.isOpen" count="demo.count"
+                  md-direction="{{demo.selectedDirection}}">
+    <md-fab-trigger class="align-with-text">
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+    
+        <md-button class="md-raised" ng-click="acceuil()" >Accueil
+        </md-button>
+        <md-button class="md-raised" ng-click="club()">Club
+        </md-button>
+         <md-button class="md-raised" ng-click="commencer()">Adhérent
+        </md-button>
+          <md-button class="md-raised md-warn" ng-click="commencer()">Connexion
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
+
+  <md-content layout-padding>
+ <h2>Réservation de terrain de tennis</h2>
+  <p> Réserve ton terrain de Tennis et planifie tes séances d'entrainements </p>
+
+    <form name="projectForm">
+
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input md-maxlength="25" ng-model="user.email" type="email">
+        <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+          <div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+        </div>
+      </md-input-container>
+
+      <div>
+        <md-button type="submit" ng-click="commencer()">Commencer</md-button>
+      </div>
+
+     
+    </form>
+  </md-content>
+  </div>
+

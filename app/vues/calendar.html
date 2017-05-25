@@ -1,0 +1,97 @@
+
+
+ <header id="header">
+  <h1 id="logo">Bonjour {{nom_club}}</h1>
+          <nav id="nav">
+            <ul>
+              
+              <li>
+                <a href="/#/gestionClub">Gestion des terrains</a>
+                
+              </li>
+              <li><a href="/#/gestionAdherents">Gestion des adhérents</a></li>
+              <li> <a href="" ng-click="deconnecterClub()" class="button special">Déconnexion</a></li>
+            </ul>
+        
+          </nav>
+        </header>
+
+      <div class="container" id="directives-calendar" ng-controller="gestionPlanningClubCtrl" style="margin-top:50px;">
+
+
+          
+            <div class="well">
+
+                <div class="row-fluid">
+
+                    <div class="span4">
+                   
+
+
+                        <ul class="unstyled">
+                            <li ng-repeat="e in events">
+                                <div class="alert alert-info">
+                                    <!--<a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a> -->
+                                    <b> <input style="color:blue;" ng-model="e.title" > </b> 
+                                    {{e.start | date:"dd MMM hh:mm"}} - {{e.end | date:"hh:mm"}}
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="span8">
+                        <tabset>
+                            <tab select="renderCalendar('myCalendar1');">
+                              <tab-heading>
+                               <i class="glyphicon glyphicon-bell"></i> {{nom_terrain}}
+                              </tab-heading>
+                              <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                                <h4>{{alertMessage}}</h4>
+                              </div>
+                              <div class="btn-toolbar">
+                                <p class="pull-right lead"></p>
+                                <div class="btn-group">
+                                    <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar1')">Jour</button>
+                                    <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar1')">Semaine</button>
+                                    <button class="btn btn-success" ng-click="changeView('month', 'myCalendar1')">Mois</button>
+                                </div>
+                              </div>
+                            <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                           </tab>
+                          
+                        </tabset>
+                    </div>
+                </div>
+          
+    </div>
+</div>
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-17352735-3']);
+            _gaq.push(['_trackPageview']);
+            (function () {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        
+    <link rel="stylesheet" href="../../bower_components/bootstrap-css/css/bootstrap.css" />
+    <link rel="stylesheet" href="../../bower_components/fullcalendar/dist/fullcalendar.css">
+   
+    <script src="../../bower_components/jquery/dist/jquery.js"></script>
+
+  
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
+    <script src="../../bower_components/moment/moment.js"></script>
+    <script src="../../bower_components/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="../../bower_components/fullcalendar/dist/gcal.js"></script>
+    <script src="../../src/calendar.js"></script>
+  
+
+
+

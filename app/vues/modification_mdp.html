@@ -1,0 +1,33 @@
+<!-- Header -->
+        <header id="header">
+          <h1 id="logo"><a href="/#!/index.html">Accueil</a></h1>
+          <nav id="nav">
+            <ul>
+              <li><a href="/#!/connexionAdherent">Adhérent</a></li>
+              <li>
+                <a href="/#!/connexionClub">Club</a>
+                
+              </li>
+              <li><a href="">Contact</a></li>
+              <li><a href="/#!/connexionAdherent" class="button special">Connexion</a></li>
+            </ul>
+          </nav>
+        </header>
+         <section id="banner2"> </section>
+   
+<div class="container" style="padding-top: 20px;">
+	<div class="container-fluid" ng-controller="modificationMdpCtrl">			
+		<h1>Modification du Mot de passe </h1>
+
+		  	<form role="form"  >
+			  	<div class="input-group">
+	   		  		<input type="password" class="form-control" ng_model= "adherent.oldMdp" placeholder="Ancien Mot de passe" required  />
+	   		  		<input type="password" class="form-control" ng_model= "adherent.newMdp" placeholder="Nouveau Mot de passe" required  />
+	   		  		<input type="password" class="form-control" ng_model= "adherent.newMdp2" placeholder="Nouveau Mot de passe" required  />
+				    <input type="submit" class="form-control" ng-click="modifier()" value="Modifier le Mot de passe"  	/>
+				</div>		
+			</form>
+			
+	</div> </div>
+			
+		
