@@ -10,6 +10,10 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
 
     var uid=$cookies.get('userId'); 
     var terrainId=$cookies.get('terrain_id');
+
+      $scope.retour= function() {      
+      $location.path("/gestionClub");    
+    }
  
 
     var recuperer_nom_club = function(uid){

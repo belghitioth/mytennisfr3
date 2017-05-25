@@ -14,6 +14,7 @@ angular
     'ngMaterial',
     'ngRoute',
     'firebase',
+    'ui.calendar'
    
    
   ])

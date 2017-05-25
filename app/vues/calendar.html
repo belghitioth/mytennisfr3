@@ -1,22 +1,26 @@
 
+  
 
- <header id="header">
-  <h1 id="logo">Bonjour {{nom_club}}</h1>
-          <nav id="nav">
-            <ul>
-              
-              <li>
-                <a href="/#/gestionClub">Gestion des terrains</a>
-                
-              </li>
-              <li><a href="/#/gestionAdherents">Gestion des adhérents</a></li>
-              <li> <a href="" ng-click="deconnecterClub()" class="button special">Déconnexion</a></li>
-            </ul>
-        
-          </nav>
-        </header>
+      <div class="container" id="directives-calendar" ng-controller="gestionPlanningClubCtrl">
 
-      <div class="container" id="directives-calendar" ng-controller="gestionPlanningClubCtrl" style="margin-top:50px;">
+
+         <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate> Planning {{nom_terrain}}</h2>
+          <md-button class="md-raised md-warn" ng-click="retour()">Retour 
+        </md-button>
+
+ 
+
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
 
 
           
@@ -24,28 +28,11 @@
 
                 <div class="row-fluid">
 
-                    <div class="span4">
-                   
-
-
-                        <ul class="unstyled">
-                            <li ng-repeat="e in events">
-                                <div class="alert alert-info">
-                                    <!--<a class="close" ng-click="remove($index)"><i class="icon-remove"></i></a> -->
-                                    <b> <input style="color:blue;" ng-model="e.title" > </b> 
-                                    {{e.start | date:"dd MMM hh:mm"}} - {{e.end | date:"hh:mm"}}
-                                </div>
-                            </li>
-                        </ul>
-
-                    </div>
 
                     <div class="span8">
                         <tabset>
                             <tab select="renderCalendar('myCalendar1');">
-                              <tab-heading>
-                               <i class="glyphicon glyphicon-bell"></i> {{nom_terrain}}
-                              </tab-heading>
+                              
                               <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
                                 <h4>{{alertMessage}}</h4>
                               </div>
