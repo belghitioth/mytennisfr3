@@ -8,6 +8,8 @@ angular.module('mytennisfr2App')
       var auth = $firebaseAuth();
        var ref=firebase.database().ref('/clubs/');
         $scope.clubs = $firebaseArray(ref.orderByChild("nom"));
+
+        console.log($firebaseArray(ref.orderByChild("nom"))); 
       
       $scope.inscrireAdherent = function() {
 
@@ -15,10 +17,13 @@ angular.module('mytennisfr2App')
         var email = $scope.adherent.email;
         var password = $scope.adherent.mdp;
         var prenom = $scope.adherent.prenom;
-        var club =$scope.adherent.club;
-        var key_club="";
-        var birthday=$scope.adherent.birthday;
-        var nb_adherents=$scope.nb_adherents;
+        var club = $scope.adherent.club;
+        var sexe = $scope.adherent.sexe;
+        var key_club = "";
+        var birthday = $scope.adherent.birthday;
+        var nb_adherents = $scope.nb_adherents;
+        var tel = $scope.adherent.tel;
+        var classement = $scope.adherent.classement;
 
         var ref = firebase.database().ref('/clubs/');
     		var obj = $firebaseObject(ref);

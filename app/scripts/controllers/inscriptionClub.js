@@ -12,6 +12,7 @@ angular.module('mytennisfr2App')
         var email = $scope.club.email;
         var password = $scope.club.mdp;
         var ville = $scope.club.ville;
+        var tel=$scope.club.tel;
 
 
          auth.$createUserWithEmailAndPassword(email, password)

@@ -27,8 +27,64 @@
 			
 			<h1>Inscription Club </h1>
 			  	
+				<form name="projectForm">
 
+					  <md-input-container class="md-block">
+				        <label>Nom</label>
+				        <input ng-model="club.nom" type="text">
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				           </div>
+				      </md-input-container>
 
+				     
+				      <md-input-container class="md-block">
+				        <label>Ville</label>
+				        <input ng-model="club.ville" type="text">
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				           </div>
+				      </md-input-container>
+
+ 					  <md-input-container class="md-block">
+				        <label>Téléphone</label>
+				        <input ng-model="club.tel" type="text">
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				           </div>
+				      </md-input-container>
+
+				      <md-input-container class="md-block">
+				        <label>Email</label>
+				        <input ng-model="adherent.email" type="email">
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				           </div>
+				      </md-input-container>
+				      
+				      <md-input-container class="md-block">
+				        <label>Mot de passe</label>
+				        <input ng-model="club.mdp" type="password" id="mdp1" oninput="checkPasswords()" >
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				          </div>
+				      </md-input-container>
+
+				      <md-input-container class="md-block">
+				        <label>Confirmer Mot de passe</label>
+				        <input ng-model="club.mdpconf" type="password" id="mdp2" oninput="checkPasswords()">
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				          </div>
+				      </md-input-container>
+
+				       	<div>
+				        	<md-button class="md-raised md-primary" type="submit" ng-click="inscrireClub()">S'inscrire</md-button>
+				      	</div>
+
+				     
+				    </form>
+<!--
 					<form  role="form">
 					<div class="input-group">
 
@@ -42,6 +98,8 @@
 
 					</div>
 					</form>
+
+					-->
 				<p> {{log }}</p>
 
 
