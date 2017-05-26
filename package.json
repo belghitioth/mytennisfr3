@@ -33,14 +33,9 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-	"postinstall": "bower install",
-
-   
+    "test": "karma start test/karma.conf.js"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "express": "^4.15.3",
-    "jquery": "^3.2.1",
-    "moment": "^2.18.1"
+    "express": "^4.15.3"
   }
 }
