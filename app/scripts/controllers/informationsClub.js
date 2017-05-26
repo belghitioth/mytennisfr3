@@ -21,6 +21,9 @@ angular.module('mytennisfr2App')
             }         
             if(key=='email'){           
               $scope.email=value;
+            } 
+            if(key=='ville'){           
+              $scope.ville=value;
             }     
             
         });  
