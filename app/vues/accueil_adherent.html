@@ -53,20 +53,23 @@ table, th , td {
             </md-option>
           </md-select>
         </md-input-container>
-
-   
-<md-input-container class="md-block">
-        <label>Début du créneau</label>
-        <input ng-model="creneau.start" type="text"  placeholder=" (Ex : AAAA,MM,JJ,hh,mm ) ">
-        <div ng-messages="projectForm.description.$error">
-          <div ng-message="required">Champ requis</div>
-           </div>
-      </md-input-container>
-       
+  
     
 
+<div class="input-group"
+     moment-picker="ctrl.datepicker" locale="fr"
+     format="DD/MM/YYYY HH:00">
+    <span class="input-group-addon">
+        <i class="octicon octicon-calendar"></i>
+    </span>
+    <input class="form-control"
+           placeholder="Select a date"
+           ng-model="ctrl.datepicker"
+           ng-model-options="{ updateOn: 'blur' }">
+</div>
+
        <div>
-        <md-button type="submit" ng-click="reserver()" >Je réserve !</md-button>
+        <md-button class="md-raised md-primary" type="submit" ng-click="reserver()" >Je réserve !</md-button>
       </div>
 
      

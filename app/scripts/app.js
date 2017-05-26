@@ -15,6 +15,7 @@ angular
     'ngRoute',
     'firebase', 
     'ui.calendar',
+    'moment-picker'
    
    
   ])

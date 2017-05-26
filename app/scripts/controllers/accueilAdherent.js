@@ -66,19 +66,28 @@ angular.module('mytennisfr2App')
 
               // Fin ajout vérification
               var nom_intitule=$scope.nom+' '+ $scope.prenom+' vs '+$scope.creneau.partenaire;
-              var start=$scope.creneau.start;
-              //+parseString(parseInt(start[11,13])+1)
+              var startpicker=$scope.ctrl.datepicker;           
+              var reg_date=new RegExp("[ /;]+", "g");
+              var reg_heure=new RegExp("[ :;]+", "g");
+              var reg_espace=new RegExp("[  ;]+", "g");
+              var start_total=startpicker.split(reg_espace);
+              var start_date=start_total[0].split(reg_date);
+              var start_heure=start_total[1].split(reg_heure);
+             
+              var start=start_date[2]+","+start_date[0]+","+start_date[1]+","+start_heure[0]+","+start_heure[1];
+       
               var reg=new RegExp("[ ,;]+", "g");
               var start_tableau=start.split(reg);
              start_tableau[3]=parseInt(start_tableau[3])+1;
              var end = start_tableau.join(',');
+            
 
                    // Vérification créneau déjà pris ou non 
               var obj_creneau= $firebaseObject(ref_creneau);
               obj_creneau.$loaded().then(function(){
               	var creneau_pris=false;
               	angular.forEach(obj_creneau, function(value, key){
-              		console.log("start ",value.start)
+              	
               		if(value.start==start && value.terrain_nom==$scope.creneau.terrain){
               			creneau_pris=true;
               		}
@@ -96,7 +105,7 @@ angular.module('mytennisfr2App')
 
               		 ref_creneau.push({
                       intitule:nom_intitule,
-                      start:$scope.creneau.start,
+                      start:start,
                       end:end,
                       terrain_id:$scope.terrain_id,
                       terrain_nom:$scope.creneau.terrain,
