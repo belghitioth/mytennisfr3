@@ -1,26 +1,28 @@
  <div ng-controller="MainCtrl" ng-cloak>
- <md-fab-toolbar md-open="demo.isOpen" count="demo.count"
-                  md-direction="{{demo.selectedDirection}}">
-    <md-fab-trigger class="align-with-text">
-      <md-button aria-label="menu" class="md-fab md-primary">
-        <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
-      </md-button>
-    </md-fab-trigger>
 
-    <md-toolbar>
-      <md-fab-actions class="md-toolbar-tools">
-    
-        <md-button class="md-raised" ng-click="acceuil()" >Accueil
+   <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
         </md-button>
-        <md-button class="md-raised" ng-click="club()">Club
+
+        <h2 flex md-truncate> MyTennis Application</h2>
+       
+        <md-button  ng-click="acceuil()" >Accueil
         </md-button>
-         <md-button class="md-raised" ng-click="commencer()">Adhérent
+        <md-button  ng-click="club()">Club
+        </md-button>
+         <md-button ng-click="commencer()">Adhérent
         </md-button>
           <md-button class="md-raised md-warn" ng-click="commencer()">Connexion
         </md-button>
-      </md-fab-actions>
+ 
+        <md-button class="md-icon-button" ng-click="commencer()"  aria-label="More">    
+          <md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
+        </md-button>
+
+      </div>
     </md-toolbar>
-  </md-fab-toolbar>
   </div>
    
 <div class="container" style="padding-top: 20px;">
@@ -32,7 +34,7 @@
     <form name="projectForm">
      <md-input-container>
           <label>Choisir Club</label>
-          <md-select  ng-model="adherent.club" >
+          <md-select  ng-model="adherent.club" required >
             <md-option ng-repeat="club in clubs" ng-value="club.nom" ng-disabled="$index === 0">
               {{club.nom}}
             </md-option>
@@ -41,21 +43,21 @@
    
       <md-input-container class="md-block">
         <label>Email</label>
-        <input ng-model="adherent.email" type="email">
+        <input ng-model="adherent.email" type="email" required>
         <div ng-messages="projectForm.description.$error">
           <div ng-message="required">Champ requis</div>
            </div>
       </md-input-container>
           <md-input-container class="md-block">
         <label>Mot de passe</label>
-        <input  ng-model="adherent.mdp" type="password">
+        <input  ng-model="adherent.mdp" type="password" required>
         <div ng-messages="projectForm.description.$error">
           <div ng-message="required">Champ requis</div>
           </div>
       </md-input-container>
 
       <div>
-        <md-button type="submit" ng-click="connecterAdherent()">Connexion</md-button>
+        <md-button class="md-raised md-primary" type="submit" ng-click="connecterAdherent()">Connexion</md-button>
       </div>
 
      
@@ -63,8 +65,8 @@
 
 		 
 			<p> {{log }}</p>
+      <md-button ng-href="/#/inscriptionAdherent" >S'inscrire</md-button>
 
-			<a href="/#/inscriptionAdherent">S'inscrire ...</a>
 			
 	</div> </div>
 			

@@ -11,13 +11,13 @@
         </md-button>
 
         <h2 flex md-truncate> Planning {{nom_terrain}}</h2>
-          <md-button class="md-raised md-warn" ng-click="retour()">Retour 
+          <md-button  ng-click="retour()">Retour 
         </md-button>
 
  
 
-        <md-button class="md-icon-button" aria-label="More">
-          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        <md-button class="md-icon-button" ng-click="retour()" aria-label="More">
+          <md-icon md-svg-icon="img/icons/ic_arrow_back_24px.svg"></md-icon>
         </md-button>
       </div>
     </md-toolbar>
@@ -67,16 +67,7 @@
             })();
         </script>
         
-    <link rel="stylesheet" href="../../bower_components/bootstrap-css/css/bootstrap.css" />
-    <link rel="stylesheet" href="../../bower_components/fullcalendar/dist/fullcalendar.css">
    
-    <script src="../../bower_components/jquery/dist/jquery.js"></script>
-
-  
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
-    <script src="../../bower_components/moment/moment.js"></script>
-    <script src="../../bower_components/fullcalendar/dist/fullcalendar.js"></script>
-    <script src="../../bower_components/fullcalendar/dist/gcal.js"></script>
     <script src="../../src/calendar.js"></script>
   
 

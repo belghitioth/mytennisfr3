@@ -1,19 +1,30 @@
-<!-- Header -->
-        <header id="header">
-          <h1 id="logo"><a href="index.html">Accueil</a></h1>
-          <nav id="nav">
-            <ul>
-              <li><a href="/#/connexionAdherent">Adhérent</a></li>
-              <li>
-                <a href="/#/connexionClub">Club</a>
-                
-              </li>
-              <li><a href="">Contact</a></li>
-              <li><a href="/#/connexionAdherent" class="button special">Connexion</a></li>
-            </ul>
-          </nav>
-        </header>
-         <section id="banner2"> </section>
+ <div ng-controller="MainCtrl" ng-cloak>
+
+   <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate> MyTennis Application</h2>
+       
+        <md-button  ng-click="acceuil()" >Accueil
+        </md-button>
+        <md-button  ng-click="club()">Club
+        </md-button>
+         <md-button ng-click="commencer()">Adhérent
+        </md-button>
+          <md-button class="md-raised md-warn" ng-click="commencer()">Connexion
+        </md-button>
+ 
+        <md-button class="md-icon-button" ng-click="commencer()"  aria-label="More">    
+          <md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
+        </md-button>
+
+      </div>
+    </md-toolbar>
+  </div>
+   
    
 <div class="container" style="padding-top: 20px;">
 				
