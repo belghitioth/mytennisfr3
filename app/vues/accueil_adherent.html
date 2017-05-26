@@ -1,12 +1,3 @@
- <style>
-table, th , td {
-  border: 1px solid grey;
-  padding: 5px;
-}
-
-}
-</style> 
-
 <div ng-cloak>
   <md-content>
    <md-toolbar class="md-hue-2">
@@ -105,17 +96,43 @@ table, th , td {
       
    
         <div class="container-fluid" ng-controller="reservationsAdherentCtrl">
-        <h2>Réservations</h2>
-          <input type="text"  class="form-control" placeholder="Filtrer ..." ng-model="searchText2">
-          <br>
+        <h3>Gérer ses réservations</h3>
+        
 
+          <md-table-container>
+  <table md-table ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+      <tr md-row>
+        <th md-column md-order-by="nameToLower"><span>Intitulé</span></th>
+        <th md-column md-order-by="nameToLower"><span>Date</span></th>
+        <th md-column md-order-by="nameToLower"><span>Heure</span></th>
+        <th md-column md-order-by="nameToLower"><span>Terrain</span></th>
+         <th md-column md-order-by="nameToLower"><span>Action</span></th>
+    
+        
+       
+        
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row   ng-repeat="creneau in creneaux ">
+       <td md-cell>{{creneau.intitule}}</td>
+        <td md-cell>{{creneau.date}}</td>
+         <td md-cell>{{creneau.heure }}</td>
+         <td md-cell>{{creneau.terrain_nom}}</td>
+          <td md-cell >
+        <a ng-click=""  href=""> Annuler   
+        </a> </td>
+        
 
+        </tr> 
+          
+       
       
-        <table>
-      <tr><td>Intitulé </td><td> Début </td><td> Fin </td><td> Terrain </td> </tr>
-       <tr ng-repeat="creneau in creneaux " ><td> {{ creneau.intitule}} </td><td> {{ creneau.start }}  </td><td> {{ creneau.end }}  </td><td> {{creneau.terrain_nom}} </tr> 
+    </tbody>
+  </table>
+</md-table-container>
 
-      </table>
       
   </div> 
   
@@ -125,17 +142,22 @@ table, th , td {
       </md-tab>
       <md-tab label="Mes informations" >
         <md-content class="md-padding">
-          <div class="container-fluid" ng-controller="informationsAdherentCtrl">           
-                <table>
-              <tr><td>Nom </td><td> {{infos.nom}} </td></tr>
-              <tr><td> Prénom </td><td>{{infos.prenom}}</td></tr>
-              <tr><td> Date de naissance </td><td>{{infos.birthday}}</td></tr>
-              <tr><td> Mot de passe </td><td> ************</td></tr>
-              </table>
-        
-              <form  >
+          <div class="container-fluid" ng-controller="informationsAdherentCtrl"> 
+               <h3>Gérer ses informations</h3>
+             <md-table-container>
+            <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+           
+              <tbody md-body>           
+                <tr md-row><td md-cell>Nom </td><td md-cell> {{infos.nom}} </td></tr>
+                <tr md-row><td md-cell>Prénom </td><td md-cell> {{infos.prenom}} </td></tr>
+                <tr md-row><td md-cell>Date de naissance</td><td md-cell>{{infos.birthday}}</td></tr>             
+              </tbody>
+            </table>
+          </md-table-container>  
+          <br><br>      
+              <form >
                <div>
-                  <md-button type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
+                  <md-button class="md-raised md-primary" type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
                 </div>
                 
               </form>

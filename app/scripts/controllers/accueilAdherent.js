@@ -9,6 +9,7 @@ angular.module('mytennisfr2App')
    		var uid=$cookies.get('userId');
    		var nomClub=$cookies.get('nomClub');
       $scope.nomClub=nomClub;
+
    		  
    		// Récupération des informations liées à l'utilisateur connecté
    		var recuperer_infos = function(){
@@ -75,14 +76,16 @@ angular.module('mytennisfr2App')
               var start_heure=start_total[1].split(reg_heure);
              
               var start=start_date[2]+","+start_date[0]+","+start_date[1]+","+start_heure[0]+","+start_heure[1];
-       
+              var date_string=start_total[0];
+              var heure_string=start_total[1];
+              console.log(date_string,heure_string);
               var reg=new RegExp("[ ,;]+", "g");
               var start_tableau=start.split(reg);
              start_tableau[3]=parseInt(start_tableau[3])+1;
              var end = start_tableau.join(',');
             
 
-                   // Vérification créneau déjà pris ou non 
+              // Vérification créneau déjà pris ou non 
               var obj_creneau= $firebaseObject(ref_creneau);
               obj_creneau.$loaded().then(function(){
               	var creneau_pris=false;
@@ -118,6 +121,8 @@ angular.module('mytennisfr2App')
                       intitule:nom_intitule,
                       start:start,
                       end:end,
+                      date:date_string,
+                      heure:heure_string,
                       terrain_id:$scope.terrain_id,
                       terrain_nom:$scope.creneau.terrain,
                       id_user:uid

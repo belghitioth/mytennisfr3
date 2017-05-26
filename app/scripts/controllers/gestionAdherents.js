@@ -6,17 +6,13 @@ angular.module('mytennisfr2App')
   .controller('gestionAdherentsCtrl',["$scope", "$firebaseAuth",'$location',"$firebaseObject",'$rootScope',"$firebaseArray","$cookies",
    	function ($scope, $firebaseAuth, $location, $firebaseObject,$rootScope,$firebaseArray,$cookies) {
   	 		
-      	var uid=$cookies.get('userId');
+    	var uid=$cookies.get('userId');
 	  	var ref = firebase.database().ref('/clubs/'+uid);
-		var obj = $firebaseObject(ref);
+		  var obj = $firebaseObject(ref);
 
-$scope.selected = [];
+      $scope.selected = [];
   
-  $scope.query = {
-    order: 'nom',
-    limit: 5,
-    page: 1
-  };
+ 
   
 
 		obj.$loaded().then(function() {

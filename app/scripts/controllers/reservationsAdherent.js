@@ -9,7 +9,10 @@ angular.module('mytennisfr2App')
    		// Récupération de l'identifiant de l'utilisateur connecté
    		var uid=$cookies.get('userId');
    		var nomClub=$cookies.get('nomClub');
-   		  
+
+
+      $scope.selected = [];
+    		  
    		// Récupération des informations liées à l'utilisateur connecté
    		var recuperer_infos = function(){
 
@@ -42,10 +45,13 @@ angular.module('mytennisfr2App')
             if (value.id_user==uid){
               $scope.creneaux[key]=value;
             };
+
             
           });
+
   
         });
+
        
     
    		}
