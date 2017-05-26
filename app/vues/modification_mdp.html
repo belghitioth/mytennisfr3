@@ -1,19 +1,19 @@
-<!-- Header -->
-        <header id="header">
-          <h1 id="logo"><a href="/#!/index.html">Accueil</a></h1>
-          <nav id="nav">
-            <ul>
-              <li><a href="/#!/connexionAdherent">Adhérent</a></li>
-              <li>
-                <a href="/#!/connexionClub">Club</a>
-                
-              </li>
-              <li><a href="">Contact</a></li>
-              <li><a href="/#!/connexionAdherent" class="button special">Connexion</a></li>
-            </ul>
-          </nav>
-        </header>
-         <section id="banner2"> </section>
+  <md-toolbar class="md-hue-2" ng-controller="accueilAdherentCtrl">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate> Bonjour {{prenom}}</h2>
+
+          <md-button class="md-raised md-warn" ng-click="deconnecterAdherent()" >Déconnexion
+        </md-button>
+
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
    
 <div class="container" style="padding-top: 20px;">
 	<div class="container-fluid" ng-controller="modificationMdpCtrl">			

@@ -85,6 +85,12 @@ angular.module('mytennisfr2App')
             });
     
 		}
+
+		
+      $scope.retour= function() {      
+      $location.path("/gestionClub");    
+    }
+ 
 		
 		    
               

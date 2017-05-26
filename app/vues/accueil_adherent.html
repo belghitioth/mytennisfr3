@@ -17,7 +17,8 @@ table, th , td {
 
         <h2 flex md-truncate> Bonjour {{prenom}}</h2>
 
- 
+          <md-button class="md-raised md-warn" ng-click="deconnecterAdherent()" >Déconnexion
+        </md-button>
 
         <md-button class="md-icon-button" aria-label="More">
           <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
@@ -105,34 +106,27 @@ table, th , td {
       </md-tab>
       <md-tab label="Mes informations" >
         <md-content class="md-padding">
-          <div class="container-fluid" ng-controller="informationsAdherentCtrl">
-
-   
-        <table>
-      <tr><td>Nom </td><td> {{infos.nom}} </td></tr>
-      <tr><td> Prénom </td><td>{{infos.prenom}}</td></tr>
-      <tr><td> Date de naissance </td><td>{{infos.birthday}}</td></tr>
-      <tr><td> Mot de passe </td><td> ************</td></tr>
-
-
-
-      </table>
+          <div class="container-fluid" ng-controller="informationsAdherentCtrl">           
+                <table>
+              <tr><td>Nom </td><td> {{infos.nom}} </td></tr>
+              <tr><td> Prénom </td><td>{{infos.prenom}}</td></tr>
+              <tr><td> Date de naissance </td><td>{{infos.birthday}}</td></tr>
+              <tr><td> Mot de passe </td><td> ************</td></tr>
+              </table>
         
-    <form  >
-     <div>
-        <md-button type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
-      </div>
-      
-    </form>
+              <form  >
+               <div>
+                  <md-button type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
+                </div>
+                
+              </form>
 
 
-  </div> 
+          </div> 
      
         </md-content>
       </md-tab>
-      <md-tab  ng-click="deconnecterAdherent()" label="Déconnexion">
-       
-      </md-tab>
+      
     </md-tabs>
   </md-content>
 </div>

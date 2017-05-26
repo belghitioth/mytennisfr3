@@ -16,7 +16,8 @@ table, th , td {
         </md-button>
 
         <h2 flex md-truncate> Bonjour {{nom}}</h2>
-
+             <md-button class="md-raised md-warn" ng-click="deconnecterClub()" >Déconnexion
+        </md-button>
  
 
         <md-button class="md-icon-button" aria-label="More">
@@ -101,9 +102,31 @@ table, th , td {
       
         </md-content>
       </md-tab>
-      <md-tab  ng-click="deconnecterClub()" label="Déconnexion">
+
+      <md-tab label="Informations Club" >
+        <md-content class="md-padding">
+        <div ng-controller="informationsClubCtrl">
+
+          <h1>Informations Club </h1>
+        <table>
+      <tr><td>Nom </td><td> {{nom}} </td></tr>
+      <tr><td>Email </td><td>{{email}}</td></tr>
+      <tr><td>Nombre d'adhérents </td><td>{{nb_adherents}}</td></tr>
+
+      </table>
+        <form  >
+       <div>
+          <md-button type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
+        </div>
+      </form>
+    
        
+        <p> {{log }}</p>
+        </div>
+      
+        </md-content>
       </md-tab>
+   
     </md-tabs>
   </md-content>
 </div>

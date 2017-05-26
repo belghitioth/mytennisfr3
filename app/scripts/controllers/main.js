@@ -9,11 +9,7 @@
  */
 angular.module('mytennisfr2App')
   .controller('MainCtrl', function ($scope,$location) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+ 
       $scope.commencer = function() {     
       $location.path("/connexionAdherent");    
     }

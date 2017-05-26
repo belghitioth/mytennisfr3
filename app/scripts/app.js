@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name testApp
+ * @name mytennisfr2App
  * @description
- * # testApp
+ * # mytennisfr2App
  *
  * Main module of the application.
  */
@@ -13,8 +13,7 @@ angular
     'ngCookies',
     'ngMaterial',
     'ngRoute',
-    'firebase',
-    'ui.calendar'
+    'firebase', 
    
    
   ])
@@ -42,6 +41,14 @@ angular
         templateUrl: 'vues/connexion_adherent.html',
         controller: 'connexionAdherentCtrl'
     })
+         .when('/inscriptionClub', {
+        templateUrl: 'vues/inscription_club.html',
+        controller: 'inscriptionClubCtrl'
+    })
+     .when('/inscriptionAdherent', {
+        templateUrl: 'vues/inscription_adherent.html',
+        controller: 'inscriptionAdherentCtrl'
+    })
       .when('/gestionClub', {
         templateUrl: 'vues/gestion_club.html',
         controller: 'gestionClubCtrl'
@@ -53,11 +60,7 @@ angular
     .when('/attente', {
         templateUrl: 'vues/attente.html',
         controller: 'attenteCtrl'
-    })
-    .when('/gestionAdherents', {
-        templateUrl: 'vues/gestion_adherents.html',
-        controller: 'gestionAdherentsCtrl'
-    })
+    }) 
     .when('/gestionAdmin', {
         templateUrl: 'vues/gestion_admin.html',
         controller: 'gestionAdminCtrl'
@@ -66,17 +69,21 @@ angular
         templateUrl: 'vues/gestion_club.html',
         controller: 'gestionClubCtrl'
     })
-    .when('/mesInformations', {
-        templateUrl: 'vues/informations_adherent.html',
-        controller: 'informationsAdherentCtrl'
-    })
-    .when('/mesReservations', {
-        templateUrl: 'vues/reservations_adherent.html',
-        controller: 'reservationsAdherentCtrl'
-    })
     .when('/planningClub', {
         templateUrl: 'vues/calendar.html',
         controller: 'gestionPlanningClubCtrl'
+    })
+    .when('/modificationMdp', {
+        templateUrl: 'vues/modification_mdp.html',
+        controller: 'modificationMdpCtrl'
+    })
+     .when('/modificationMdpClub', {
+        templateUrl: 'vues/modification_mdp_club.html',
+        controller: 'modificationMdpClubCtrl'
+    })
+     .when('/informationsClub', {
+        templateUrl: 'vues/informations_club.html',
+        controller: 'informationsClubCtrl'
     })
       .otherwise({
         redirectTo: '/'

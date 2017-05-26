@@ -1,0 +1,37 @@
+   <md-toolbar class="md-hue-2" ng-controller="gestionClubCtrl">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate> Bonjour {{nom}}</h2>
+             <md-button class="md-raised md-warn" ng-click="retour()" >Retour
+        </md-button>
+ 
+
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+   
+<div class="container" style="padding-top: 20px;">
+  <div class="container-fluid" ng-controller="modificationMdpClubCtrl">     
+    <h1>Modification du mot de passe </h1>
+
+        <form role="form"  >
+          <div class="input-group">
+            <input type="text" class="form-control" ng_model= "adherent.email" placeholder="Email" required  />
+              <input type="password" class="form-control" ng_model= "adherent.oldMdp" placeholder="Ancien Mot de passe" required  />
+
+              <h1> </h1>
+              
+              <input type="password" class="form-control" ng_model= "adherent.newMdp" placeholder="Nouveau Mot de passe" required  />
+              <input type="password" class="form-control" ng_model= "adherent.newMdp2" placeholder="Nouveau Mot de passe" required  />
+            <input type="submit" class="form-control" ng-click="modifier()" value="Modifier le Mot de passe"/>
+        </div>    
+      </form>
+      <p> {{log }}</p>
+      
+  </div> </div>
+

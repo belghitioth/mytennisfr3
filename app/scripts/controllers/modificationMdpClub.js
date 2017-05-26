@@ -2,7 +2,7 @@
 
 angular.module('mytennisfr2App')
 
-  .controller('modificationMdpCtrl',["$scope", "$firebaseAuth",'$location','$rootScope',"$firebaseObject","$cookies","$firebaseArray",
+  .controller('modificationMdpClubCtrl',["$scope", "$firebaseAuth",'$location','$rootScope',"$firebaseObject","$cookies","$firebaseArray",
    function ($scope, $firebaseAuth, $location,$rootScope,$firebaseObject,$cookies,$firebaseArray) {
 
         // Récupération de l'identifiant de l'utilisateur connecté
@@ -32,18 +32,18 @@ angular.module('mytennisfr2App')
       }
       
       var recuperer_infos_user = function(club_id,user_id){
-          var ref_adherent=firebase.database().ref('clubs/'+club_id+'/adherents/'+user_id);
-          var obj_adherent=$firebaseObject(ref_adherent);
-          $scope.infos={};
+	        var ref_adherent=firebase.database().ref('clubs/'+club_id+'/adherents/'+user_id);
+	        var obj_adherent=$firebaseObject(ref_adherent);
+	        $scope.infos={};
 
-          obj_adherent.$loaded().then(function(){
-              angular.forEach(obj_adherent, function(value, key){
-                $scope.infos[key]=value;
-               
-                  $scope.prenom=$scope.infos['prenom']; 
-              });
-          })   
-        }
+	        obj_adherent.$loaded().then(function(){
+	            angular.forEach(obj_adherent, function(value, key){
+	              $scope.infos[key]=value;
+	             
+	                $scope.prenom=$scope.infos['prenom']; 
+	            });
+	        })   
+      	}
 
 
 
@@ -51,9 +51,9 @@ angular.module('mytennisfr2App')
 
          
 
-         var email = $scope.adherent.email;
+	       var email = $scope.adherent.email;
          var currentPassword = $scope.adherent.oldMdp;
-         var newPassword = $scope.adherent.newMdp ;
+			   var newPassword = $scope.adherent.newMdp ;
          var newPassword2 = $scope.adherent.newMdp2;
          
          firebase.auth().signInWithEmailAndPassword(email, currentPassword).then(function(){
