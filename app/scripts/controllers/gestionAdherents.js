@@ -10,6 +10,15 @@ angular.module('mytennisfr2App')
 	  	var ref = firebase.database().ref('/clubs/'+uid);
 		var obj = $firebaseObject(ref);
 
+$scope.selected = [];
+  
+  $scope.query = {
+    order: 'nom',
+    limit: 5,
+    page: 1
+  };
+  
+
 		obj.$loaded().then(function() {
 	     	angular.forEach(obj, function(value, key) {
 	     		
@@ -21,8 +30,25 @@ angular.module('mytennisfr2App')
 		       	}			       
 		        
 	       	});
-	       	ref=firebase.database().ref('/clubs/'+uid+'/adherents');
-     		$scope.adherents = $firebaseArray(ref.orderByChild("nom"));
+
+	       	var ref_adherents=firebase.database().ref('/clubs/'+uid+'/adherents');
+            $scope.adherents = $firebaseArray(ref_adherents.orderByChild("nom"));
+    console.log($scope.adherents);
+           ref_adherents.once("value")
+          .then(function(snapshot) {
+            $scope.adherents2=snapshot.val();
+             snapshot.forEach(function(childSnapshot) {
+
+
+            console.log(childSnapshot.val());
+           
+            });
+
+
+          });
+
+       // 
+     	
      		
      	});
 			

@@ -1,10 +1,5 @@
  <style>
-table, th , td {
-  border: 1px solid grey;
-  padding: 5px;
-}
 
-}
 </style> 
 
 <div ng-cloak>
@@ -78,6 +73,42 @@ table, th , td {
       <md-tab label="Gestion des adhérents" >
         <md-content class="md-padding">
         <div ng-controller="gestionAdherentsCtrl">
+        <!-- Début ajout -->
+
+        <md-table-container>
+  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+      <tr md-row>
+        <th md-column md-order-by="nameToLower"><span>Nom</span></th>
+        <th md-column md-order-by="adherent.prenom"><span>Prenom</span></th>
+        <th md-column md-order-by="nameToLower"><span>Année de naissance</span></th>
+        <th md-column md-order-by="nameToLower"><span>E-mail</span></th>
+        <th md-column md-order-by="nameToLower"><span>Compte activé</span></th>
+        <th md-column md-order-by="nameToLower"><span>Action</span></th>
+        
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select="adherent" md-select-id="name" md-auto-select ng-repeat="adherent in adherents">
+        <td md-cell>{{adherent.nom}}</td>
+        <td md-cell>{{adherent.prenom}}</td>
+         <td md-cell>{{adherent.birthday}}</td>
+         <td md-cell>{{adherent.email}}</td>
+         <td md-cell>{{adherent.adherent_active}}</td>
+          <td md-cell ng-show="adherent.adherent_active == 'non'">
+        <a ng-click="activerAdherent(adherent.cid)"  href=""> Activer    
+        </a> </td>
+         <td md-cell ng-show="adherent.adherent_active == 'oui'"><a ng-click="desactiverAdherent(adherent.cid)"  href=""> Désactiver     
+         </a> </td>
+
+          
+       
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+        <!-- Fin Ajout 
           <h2 class="md-display-2">Nombre d'adhérents : {{nb_adherents}}</h2>
           
           <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
@@ -97,7 +128,7 @@ table, th , td {
       </table><br>
     
        
-        <p> {{log }}</p>
+        <p> {{log }}</p> -->
         </div>
       
         </md-content>

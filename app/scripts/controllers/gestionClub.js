@@ -10,6 +10,8 @@ angular.module('mytennisfr2App')
 	  	var ref = firebase.database().ref('/clubs/'+uid);
 		var obj = $firebaseObject(ref);
 
+
+
 		obj.$loaded().then(function() {
 	     	angular.forEach(obj, function(value, key) {
 	           	if(key=='nom'){		       		
@@ -22,6 +24,7 @@ angular.module('mytennisfr2App')
 	       	});
 	       	ref=firebase.database().ref('/clubs/'+uid+'/terrains');
      		$scope.terrains = $firebaseArray(ref.orderByChild("nom"));
+     		console.log($firebaseArray(ref.orderByChild("nom")));
      	});
 			
    	  
