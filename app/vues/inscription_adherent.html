@@ -31,7 +31,7 @@
 					  <md-input-container>
 				          <label>Club</label>
 				          <md-select  ng-model="adherent.club" required >
-				            <md-option ng-repeat="club in clubs" ng-value="club" ng-disabled="$index === 0">
+				            <md-option ng-repeat="club in clubs" ng-value="club.nom" ng-disabled="$index === 0">
 				              {{club.nom}}
 				            </md-option>
 				          </md-select>
@@ -99,7 +99,7 @@
 
 					  <md-input-container class="md-block">
 				        <label>Nom</label>
-				        <input ng-model="adherent.nom" type="text">
+				        <input ng-model="adherent.nom" type="text" required>
 				        <div ng-messages="projectForm.description.$error">
 				          <div ng-message="required">Champ requis</div>
 				           </div>
@@ -107,7 +107,7 @@
 
 				      <md-input-container class="md-block">
 				        <label>Prénom</label>
-				        <input ng-model="adherent.prenom" type="text">
+				        <input ng-model="adherent.prenom" type="text" required>
 				        <div ng-messages="projectForm.description.$error">
 				          <div ng-message="required">Champ requis</div>
 				           </div>
@@ -115,7 +115,7 @@
 
 				      <md-input-container class="md-block">
 				        <label>Année de naissance</label>
-				        <input ng-model="adherent.birthday" type="text">
+				        <input ng-model="adherent.birthday" type="text" required>
 				        <div ng-messages="projectForm.description.$error">
 				          <div ng-message="required">Champ requis</div>
 				           </div>
@@ -123,7 +123,7 @@
 
 				      <md-input-container class="md-block">
 				        <label>Téléphone</label>
-				        <input ng-model="adherent.tel" type="text">
+				        <input ng-model="adherent.tel" type="text" required>
 				        <div ng-messages="projectForm.description.$error">
 				          <div ng-message="required">Champ requis</div>
 				           </div>
@@ -131,7 +131,7 @@
 
 				      <md-input-container class="md-block">
 				        <label>Email</label>
-				        <input ng-model="adherent.email" type="email">
+				        <input ng-model="adherent.email" type="email" required>
 				        <div ng-messages="projectForm.description.$error">
 				          <div ng-message="required">Champ requis</div>
 				           </div>
@@ -160,30 +160,13 @@
 				     
 				    </form>
 
+				      <div ng-if="status" id="status">
+					    <b layout="row" layout-align="center center" class="md-padding">
+					      {{status}}
+					    </b>
+					  </div>
 
 
-
-<!--					<form  role="form">
-
-<
-					<div class="input-group">
-
-					<select ng-model="adherent.club" ng-options="club.nom as club.nom for club in clubs">
-                          <option value="">Choisir Club</option>
-        </select>
-					<input type="text" class="form-control"   ng-model="adherent.nom" name="nom"  placeholder="Nom"  required ng-minlength="2" ng-maxlength="20"/>
-					<input type="text" class="form-control" ng-model="adherent.prenom" name="prenom"  placeholder="Prenom"  ng-maxlength="30" required />  
-					<input type="email" class="form-control" ng-model="adherent.email" name="email"  placeholder="Email" required />  
-					<input type="password" class="form-control"  ng-model="adherent.mdp" id="mdp1" name="mdp_adherent" oninput="checkPasswords()" placeholder="Mot de passe" required /> 	
-					<input type="password" class="form-control"   name="mdp_adherent2"  id="mdp2" oninput="checkPasswords()" placeholder="Confirmer mot de passe" required />
-					<input type="text" class="form-control"   ng-model="adherent.birthday" name="birthday"  placeholder="Année de naissance"  required ng-minlength="4" ng-maxlength="30"/>			
-						
-					<input class="form-control" type="submit" ng-click="inscrireAdherent()" value="S'inscrire" />
-
-					</div>
-					</form>
-				
--->
 
 			
 			</div> </div>

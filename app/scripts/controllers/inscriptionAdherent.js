@@ -9,7 +9,7 @@ angular.module('mytennisfr2App')
        var ref=firebase.database().ref('/clubs/');
         $scope.clubs = $firebaseArray(ref.orderByChild("nom"));
 
-        console.log($firebaseArray(ref.orderByChild("nom"))); 
+       
       
       $scope.inscrireAdherent = function() {
 
@@ -18,6 +18,7 @@ angular.module('mytennisfr2App')
         var password = $scope.adherent.mdp;
         var prenom = $scope.adherent.prenom;
         var club = $scope.adherent.club;
+        console.log("club entré",club);
         var sexe = $scope.adherent.sexe;
         var key_club = "";
         var birthday = $scope.adherent.birthday;
@@ -25,14 +26,21 @@ angular.module('mytennisfr2App')
         var tel = $scope.adherent.tel;
         var classement = $scope.adherent.classement;
 
-        var ref = firebase.database().ref('/clubs/');
-    		var obj = $firebaseObject(ref);
-			
-        
+        var ref_clubs = firebase.database().ref('/clubs/');
+    		var obj_clubs = $firebaseObject(ref_clubs);
 
+         obj_clubs.$loaded().then(function() {
+          angular.forEach(obj_clubs, function(value, key) {
+          
+              if(value.nom==club){             
+                $scope.key_club = key;
+              }           
+              console.log($scope.key_club);    
+              
+              
+            })
 
-
-         auth.$createUserWithEmailAndPassword(email, password)
+          auth.$createUserWithEmailAndPassword(email, password)
          .then(function(userRecord) {
         // A UserRecord representation of the newly created user is returned
             console.log("Utilisateur créé:", userRecord.uid);
@@ -40,13 +48,17 @@ angular.module('mytennisfr2App')
               cid:userRecord.uid,
               nom: nom,
               prenom: prenom,
+              sexe:sexe,
               email:email,
               birthday:birthday,
+              tel:tel,
+              classement:classement,
               mdp_adherent:password,
               adherent_active:'non'
               
             });
-            $location.path("/attente");
+            //$location.path("/attente");
+             $scope.status="Adhérent crée avec succés";     
             console.log("adherent créé en attente d'activation ...");
             
 
@@ -60,16 +72,16 @@ angular.module('mytennisfr2App')
           var errorCode = error.code;         
           console.log(errorCode);         
           if(errorCode=='auth/weak-password'){
-            $scope.log="Erreur : Mot de passe à - de 6 caractères";            
+            $scope.status="Erreur : Mot de passe à - de 6 caractères";            
           }
           else if (errorCode=='auth/email-already-in-use'){      
-            $scope.log="Erreur : Email déjà utilisé";           
+            $scope.status="Erreur : Email déjà utilisé";           
               
             }       
           });
 
-         obj.$loaded().then(function() {
-          angular.forEach(obj, function(value, key) {  
+         obj_clubs.$loaded().then(function() {
+          angular.forEach(obj_clubs, function(value, key) {  
             
             if(value.nom==$scope.adherent.club){
               key_club=key;
@@ -85,6 +97,18 @@ angular.module('mytennisfr2App')
                   
             });
         });
+
+
+
+
+      });
+      
+			
+        
+
+
+
+         
 
      }
 
