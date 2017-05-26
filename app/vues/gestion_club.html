@@ -32,16 +32,34 @@
           <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
           <br>
 
+          <md-table-container>
+  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+      <tr md-row>
+        <th md-column md-order-by="nameToLower"><span>Nom</span></th>
+        <th md-column md-order-by="nameToLower"><span>Type</span></th>
+        <th md-column md-order-by="nameToLower"><span>Action</span></th>
+        <th md-column md-order-by="nameToLower"><span>Supression</span></th>
+       
+        
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row md-select="creneau" md-select-id="terrain.nom" md-auto-select ng-repeat="terrain in terrains | filter:searchText">
+        <td md-cell>{{terrain.nom}}</td>
+        <td md-cell> {{ terrain.type }}  </td>
+        <td md-cell><a href="" ng-click="afficherPlanning(terrain.nom)" > Gérer Planning</a></td>
+        <td md-cell>  <a href="" ng-click="supprimerTerrain(terrain.nom)"  > Supprimer</a></td>
+        </tr> 
+          
+       
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
    
        
-         <table>
-      <tr><td>Nom </td><td> Type </td><td> Action </td><td> Supression </td></tr>
-        <tr ng-repeat="terrain in terrains | filter:searchText"><td> {{ terrain.nom }} </td><td> {{ terrain.type }}  </td>
-        <td><a href="" ng-click="afficherPlanning(terrain.nom)" > Gérer Planning</a></td>
-        <td>  <a href="" ng-click="supprimerTerrain(terrain.nom)"  > Supprimer</a></td>
-        </tr> 
-
-      </table>
      
       <h3>Ajouter un terrain </h3>
        <form name="projectForm">
@@ -62,7 +80,7 @@
       </md-input-container>
 
        <div>
-        <md-button type="submit" ng-click="ajouterTerrain()">Ajouter terrain</md-button>
+        <md-button class="md-raised md-primary" type="submit" ng-click="ajouterTerrain()">Ajouter terrain</md-button>
       </div>
 
      
@@ -74,6 +92,11 @@
         <md-content class="md-padding">
         <div ng-controller="gestionAdherentsCtrl">
         <!-- Début ajout -->
+
+         <h2 class="md-display-2">Nombre d'adhérents : {{nb_adherents}}</h2>
+          
+          <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
+        <br>
 
         <md-table-container>
   <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
@@ -89,7 +112,7 @@
       </tr>
     </thead>
     <tbody md-body>
-      <tr md-row md-select="adherent" md-select-id="name" md-auto-select ng-repeat="adherent in adherents">
+      <tr md-row md-select="adherent" md-select-id="name" md-auto-select ng-repeat="adherent in adherents |filter:searchText">
         <td md-cell>{{adherent.nom}}</td>
         <td md-cell>{{adherent.prenom}}</td>
          <td md-cell>{{adherent.birthday}}</td>
@@ -108,27 +131,7 @@
   </table>
 </md-table-container>
 
-        <!-- Fin Ajout 
-          <h2 class="md-display-2">Nombre d'adhérents : {{nb_adherents}}</h2>
-          
-          <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
-        <br>
-        <table>
-      <tr><td>Nom </td><td> Prénom </td><td> Année de naissance </td><td> E-mail </td><td>Compte activé</td><td>Action </td><td>Suppression</td></tr>
-        <tr ng-repeat="adherent in adherents | filter:searchText"><td> {{ adherent.nom }} </td><td> {{ adherent.prenom }}  </td><td> {{ adherent.birthday }}  </td><td> {{ adherent.email}}  </td><td> {{ adherent.adherent_active}}  </td>
-        <td ng-show="adherent.adherent_active == 'non'">
-        <a ng-click="activerAdherent(adherent.cid)"  href=""> Activer    
-        </a> </td>
-         <td ng-show="adherent.adherent_active == 'oui'"><a ng-click="desactiverAdherent(adherent.cid)"  href=""> Désactiver     
-         </a> </td>
-         <td><a ng-click="supprimerAdherent(adherent.cid)"  href="">Supprimer</a></td>
-
-             </tr> 
-
-      </table><br>
-    
        
-        <p> {{log }}</p> -->
         </div>
       
         </md-content>
@@ -138,16 +141,25 @@
         <md-content class="md-padding">
         <div ng-controller="informationsClubCtrl">
 
-          <h1>Informations Club </h1>
-        <table>
-      <tr><td>Nom </td><td> {{nom}} </td></tr>
-      <tr><td>Email </td><td>{{email}}</td></tr>
-      <tr><td>Nombre d'adhérents </td><td>{{nb_adherents}}</td></tr>
+          <h2>Informations Club </h2>
+         <md-table-container>
+  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+ 
+    <tbody md-body>
+ 
+         <tr md-row><td md-cell>Nom </td><td md-cell> {{nom}} </td></tr>
+      <tr md-row><td md-cell>Email </td><td md-cell>{{email}}</td></tr>
+      <tr md-row><td md-cell>Nombre d'adhérents </td><td md-cell>{{nb_adherents}}</td></tr>
 
-      </table>
+          
+    
+    </tbody>
+  </table>
+</md-table-container>
+ <br><br>
         <form  >
        <div>
-          <md-button type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
+          <md-button class="md-raised md-primary" type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
         </div>
       </form>
     
