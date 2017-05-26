@@ -1,21 +1,17 @@
- <div ng-controller="MainCtrl" ng-cloak>
+ <div ng-cloak>
 
-   <md-toolbar class="md-hue-2">
-      <div class="md-toolbar-tools">
-      
+  <div class="md-toolbar-tools">
+    
 
         <h2 flex md-truncate> MyTennis </h2>
        
-        <md-button  ng-click="acceuil()" >Accueil
+        <md-button  ng-href="/#/" >Accueil 
         </md-button>
-        <md-button  ng-click="club()">Club
+        <md-button  ng-href="/#/connexionClub">Club
         </md-button>
-         <md-button ng-click="commencer()">Adhérent
-        </md-button>
-          <md-button class="md-raised md-warn" ng-click="commencer()">Connexion
-        </md-button>
- 
-        <md-button class="md-icon-button" ng-click="commencer()"  aria-label="More">    
+       
+      
+        <md-button class="md-icon-button" ng-href="/#/connexionAdherent" aria-label="More">    
           <md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
         </md-button>
 
