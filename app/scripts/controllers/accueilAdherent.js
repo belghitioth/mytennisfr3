@@ -97,13 +97,24 @@ angular.module('mytennisfr2App')
 
               	console.log("creneau pris : ",creneau_pris);
               	if(creneau_pris){
-              		 $scope.message="Erreur: Créneau déjà pris";
+              		 $scope.status="Erreur: Créneau déjà pris";
 
 
               	}
               	else{
 
-              		 ref_creneau.push({
+              	
+                 var confirm = $mdDialog.confirm()
+                          .title('Voulez vous confirmer la réservation ?')
+                          .textContent('Réservation d\'un créneau')
+                          .ariaLabel('Lucky day')
+                          .targetEvent(ev)
+                          .ok('Oui')
+                          .cancel('Annuler');
+
+                    $mdDialog.show(confirm).then(function() {
+                      $scope.status = 'Réservation effectué avec succés';
+                         ref_creneau.push({
                       intitule:nom_intitule,
                       start:start,
                       end:end,
@@ -111,17 +122,11 @@ angular.module('mytennisfr2App')
                       terrain_nom:$scope.creneau.terrain,
                       id_user:uid
                   });
+                         $location.path("/accueilAdherent");
+                    }, function() {
+                      $scope.status = 'Réservation annulée';
+                    });
 
-                  $mdDialog.show(
-                  $mdDialog.alert()
-                    .parent(angular.element(document.querySelector('#popupContainer')))
-                    .clickOutsideToClose(true)
-                    .title('Réservation')
-                    .textContent('Réservation effectuée avec succés')
-                    .ariaLabel('Alert Dialog Demo')
-                    .ok('Parfait')
-                    .targetEvent(ev)
-                );
 
              
               	}
@@ -135,6 +140,8 @@ angular.module('mytennisfr2App')
       
 			
         });
+            
+
         
 
    		}

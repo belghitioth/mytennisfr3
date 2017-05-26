@@ -71,7 +71,7 @@ table, th , td {
         <i class="octicon octicon-calendar"></i>
     </span>
     <input class="form-control"
-           placeholder="Select a date"
+           placeholder="Sélectionner date"
            ng-model="ctrl.datepicker" required
            ng-model-options="{ updateOn: 'blur' }">
             
@@ -81,12 +81,16 @@ table, th , td {
        <div>
         <md-button class="md-raised md-primary" type="submit" ng-click="reserver($event)" >Je réserve !</md-button>
       </div>
-      
+
 
 
      
     </form>
-     <p> {{message }}</p>
+      <div ng-if="status" id="status">
+    <b layout="row" layout-align="center center" class="md-padding">
+      {{status}}
+    </b>
+  </div>
 
      </div> 
   
