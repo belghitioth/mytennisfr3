@@ -2,8 +2,8 @@
 
 angular.module('mytennisfr2App')
 
-  .controller('accueilAdherentCtrl',["$scope", "$firebaseAuth",'$location',"$firebaseObject",'$rootScope',"$firebaseArray","$cookies",
-   	function ($scope, $firebaseAuth, $location, $firebaseObject,$rootScope,$firebaseArray, $cookies) {
+  .controller('accueilAdherentCtrl',["$scope", "$firebaseAuth",'$location',"$firebaseObject",'$rootScope',"$firebaseArray","$cookies", "$mdDialog",
+   	function ($scope, $firebaseAuth, $location, $firebaseObject,$rootScope,$firebaseArray, $cookies,$mdDialog) {
 
    		// Récupération de l'identifiant de l'utilisateur connecté
    		var uid=$cookies.get('userId');
@@ -49,7 +49,7 @@ angular.module('mytennisfr2App')
 
 			
    		}
-   		$scope.reserver = function(){
+   		$scope.reserver = function(ev){
    			// Recherche id terrain selectionné
    			var ref_terrain=firebase.database().ref('/clubs/'+$scope.club_id+'/terrains');
    			var obj_terrain=$firebaseObject(ref_terrain);
@@ -112,10 +112,18 @@ angular.module('mytennisfr2App')
                       id_user:uid
                   });
 
-            
+                  $mdDialog.show(
+                  $mdDialog.alert()
+                    .parent(angular.element(document.querySelector('#popupContainer')))
+                    .clickOutsideToClose(true)
+                    .title('Réservation')
+                    .textContent('Réservation effectuée avec succés')
+                    .ariaLabel('Alert Dialog Demo')
+                    .ok('Parfait')
+                    .targetEvent(ev)
+                );
 
-              $scope.message="Réservation effectuée avec succés";
-
+             
               	}
               })
             

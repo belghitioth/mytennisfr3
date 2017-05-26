@@ -37,21 +37,29 @@ table, th , td {
 
          <md-input-container>
           <label>Choisir Terrain</label>
-          <md-select  ng-model="creneau.terrain" >
+          <md-select  ng-model="creneau.terrain" required >
             <md-option ng-repeat="terrain in terrains" ng-value="terrain.nom" >
               {{terrain.nom}}
             </md-option>
           </md-select>
+          <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+         
+        </div>
         </md-input-container>
 
 
          <md-input-container>
           <label>Choisir Partenaire</label>
-          <md-select   ng-model="creneau.partenaire" >
+          <md-select   ng-model="creneau.partenaire" required>
             <md-option ng-repeat="adherent in adherents" ng-value="adherent.nom+' '+adherent.prenom " >
               {{adherent.nom}} {{adherent.prenom}}
             </md-option>
           </md-select>
+             <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+         
+        </div>
         </md-input-container>
   
     
@@ -64,13 +72,17 @@ table, th , td {
     </span>
     <input class="form-control"
            placeholder="Select a date"
-           ng-model="ctrl.datepicker"
+           ng-model="ctrl.datepicker" required
            ng-model-options="{ updateOn: 'blur' }">
+            
 </div>
 
+
        <div>
-        <md-button class="md-raised md-primary" type="submit" ng-click="reserver()" >Je réserve !</md-button>
+        <md-button class="md-raised md-primary" type="submit" ng-click="reserver($event)" >Je réserve !</md-button>
       </div>
+      
+
 
      
     </form>
