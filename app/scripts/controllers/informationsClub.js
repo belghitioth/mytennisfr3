@@ -24,6 +24,9 @@ angular.module('mytennisfr2App')
             } 
             if(key=='ville'){           
               $scope.ville=value;
+            }
+            if(key=='tel'){           
+              $scope.tel=value;
             }     
             
         });  
