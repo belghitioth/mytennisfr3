@@ -1,0 +1,299 @@
+<div ng-cloak>
+  <md-content>
+   <md-toolbar class="md-hue-2">
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" >
+          <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+        </md-button>
+
+        <h2 flex md-truncate> Bonjour {{infos.prenom}}</h2>
+
+          <md-button  ng-click="deconnecterAdherent()" >Déconnexion
+        </md-button>
+
+        <md-button class="md-icon-button" ng-click="deconnecterAdherent()"  aria-label="More">
+          <md-icon md-svg-icon="img/icons/ic_close_24px.svg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+  
+    <md-tabs md-dynamic-height md-border-bottom>
+     <md-tab label="Réserver">
+        <md-content class="md-padding">
+        <div class="container-fluid" ng-controller="accueilAdherentCtrl">
+
+    <h3>Réserver mon terrain ({{nomClub}}) : </h3>
+
+       <form name="projectForm">
+
+         <md-input-container>
+          <label>Choisir Terrain</label>
+          <md-select  ng-model="creneau.terrain" required >
+            <md-option ng-repeat="terrain in terrains" ng-value="terrain.nom" >
+              {{terrain.nom}}
+            </md-option>
+          </md-select>
+          <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+         
+        </div>
+        </md-input-container>
+
+
+         <md-input-container>
+          <label>Choisir Partenaire</label>
+          <md-select   ng-model="creneau.partenaire" required>
+            <md-option ng-repeat="adherent in adherents" ng-value="adherent.nom+' '+adherent.prenom " >
+              {{adherent.nom}} {{adherent.prenom}}
+            </md-option>
+          </md-select>
+             <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+         
+        </div>
+        </md-input-container>
+  
+    
+
+<div class="input-group"
+     moment-picker="ctrl.datepicker" locale="fr"
+     format="DD/MM/YYYY HH:00">
+    <span class="input-group-addon">
+        <i class="octicon octicon-calendar"></i>
+    </span>
+    <input class="form-control"
+           placeholder="Sélectionner date"
+           ng-model="ctrl.datepicker" required
+           ng-model-options="{ updateOn: 'blur' }">
+            
+</div>
+
+
+       <div>
+        <md-button class="md-raised md-primary" type="submit" ng-click="reserver($event)" >Je réserve !</md-button>
+      </div>
+
+
+
+     
+    </form>
+      <div ng-if="status" id="status">
+    <b layout="row" layout-align="center center" class="md-padding">
+      {{status}}
+    </b>
+  </div>
+
+     </div> 
+  
+         
+        </md-content>
+      </md-tab>
+
+      <md-tab label="Mes Réservations">
+        <md-content class="md-padding">
+  
+          
+      
+   
+        <div class="container-fluid" ng-controller="reservationsAdherentCtrl">
+        <h3>Gérer ses réservations</h3>
+        
+
+          <md-table-container>
+  <table md-table ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+      <tr md-row>
+        <th md-column md-order-by="nameToLower"><span>Intitulé</span></th>
+        <th md-column md-order-by="nameToLower"><span>Date</span></th>
+        <th md-column md-order-by="nameToLower"><span>Heure</span></th>
+        <th md-column md-order-by="nameToLower"><span>Terrain</span></th>
+         <th md-column md-order-by="nameToLower"><span>Action</span></th>
+    
+        
+       
+        
+      </tr>
+    </thead>
+    <tbody md-body>
+      <tr md-row   ng-repeat="creneau in creneaux ">
+       <td md-cell>{{creneau.intitule}}</td>
+        <td md-cell>{{creneau.date}}</td>
+         <td md-cell>{{creneau.heure }}</td>
+         <td md-cell>{{creneau.terrain_nom}}</td>
+          <td md-cell >
+        <a ng-click=""  href=""> Annuler   
+        </a> </td>
+        
+
+        </tr> 
+          
+       
+      
+    </tbody>
+  </table>
+</md-table-container>
+
+      
+  </div> 
+  
+  
+ 
+        </md-content>
+      </md-tab>
+      <md-tab label="Partenaires">
+              <md-content class="md-padding">
+        
+                
+            
+         
+              <div class="container-fluid" ng-controller="reservationsAdherentCtrl">
+              <h3>Recherche de partenaires</h3>
+
+
+              <md-input-container>
+                        <label>Sexe</label>
+                        <md-select  ng-model="adherent.sexe" required >
+                          <md-option  value="F" >
+                            F
+                          </md-option>
+                          <md-option  value="M" >
+                            M
+                          </md-option>  
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Classement</label>
+                        <md-select  ng-model="adherent.classement" required >
+                          <md-option  value="Non Classé" >
+                            Non Classé
+                          </md-option>
+                          <md-option  value="40" >
+                            40
+                          </md-option>
+                          <md-option  value="30/5" >
+                            30/5
+                          </md-option>
+                          <md-option  value="30/4" >
+                            30/4
+                          </md-option>
+                          <md-option  value="30/3" >
+                            30/3
+                          </md-option>
+                          <md-option  value="30/2" >
+                            30/2
+                          </md-option>
+                          <md-option  value="30/1" >
+                            30/1
+                          </md-option>
+                          <md-option  value="30/0" >
+                            30/0
+                          </md-option>
+                          <md-option  value="15/5" >
+                            15/5
+                          </md-option>
+                          <md-option  value="15/4" >
+                            15/4
+                          </md-option>
+                          <md-option  value="15/3" >
+                            15/3
+                          </md-option>
+                          <md-option  value="15/2" >
+                            15/2
+                          </md-option>
+                          <md-option  value="15/1" >
+                            15/1
+                          </md-option>
+                          <md-option  value="15/0" >
+                            15/0
+                          </md-option> 
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                      <label>Année de naissance</label>
+                      <input ng-model="adherent.birthday" type="text" required>
+                      <div ng-messages="projectForm.description.$error">
+                        <div ng-message="required">Champ requis</div>
+                         </div>
+                    </md-input-container>  
+
+                    <div>
+                        <md-button class="md-raised md-primary" type="submit" ng-click="trouverPartenaire()">Trouver un partenaire</md-button>
+                    </div>    
+
+
+      <h3>Partenaires correspondant aux critères</h3>
+
+
+      <md-table-container>
+        <table md-table ng-model="selected" md-progress="promise">
+          <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+            <tr md-row>
+              <th md-column md-order-by="nameToLower"><span>Nom</span></th>
+              <th md-column md-order-by="nameToLower"><span>Prénom</span></th>
+              <th md-column md-order-by="nameToLower"><span>Classement</span></th>
+              <th md-column md-order-by="nameToLower"><span>Année de naissance</span></th>
+               <th md-column md-order-by="nameToLower"><span>Téléphone</span></th>
+            </tr>
+          </thead>
+
+          <tbody md-body>
+            <tr md-row   ng-repeat="creneau in creneaux ">
+              <td md-cell>{{adherent.nom}}</td>
+              <td md-cell>{{adherent.prenom}}</td>
+              <td md-cell>{{adherent.classement }}</td>
+              <td md-cell>{{adherent.birthday}}</td>
+              <td md-cell>{{adherent.tel}}</td>
+              <td md-cell ><a ng-click=""  href=""> Annuler </a></td>
+            </tr>    
+          </tbody>
+        </table>
+      </md-table-container>
+
+            
+        </div> 
+        
+  
+ 
+        </md-content>
+   </md-tab>
+
+
+
+
+      
+      <md-tab label="Mes informations" >
+        <md-content class="md-padding">
+          <div class="container-fluid" ng-controller="accueilAdherentCtrl"> 
+               <h3>Gérer ses informations</h3>
+             <md-table-container>
+            <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+           
+              <tbody md-body>           
+                <tr md-row><td md-cell>Nom </td><td md-cell> {{infos.nom}} </td></tr>
+                <tr md-row><td md-cell>Prénom </td><td md-cell> {{infos.prenom}} </td></tr>
+                <tr md-row><td md-cell>Date de naissance</td><td md-cell>{{infos.birthday}}</td></tr> 
+                <tr md-row><td md-cell>Téléphone</td><td md-cell>{{infos.tel}}</td></tr>
+                <tr md-row><td md-cell>Classement</td><td md-cell>{{infos.classement}}</td></tr>             
+              </tbody>
+            </table>
+          </md-table-container>  
+          <br><br>      
+              <form >
+               <div>
+                  <md-button class="md-raised md-primary" type="submit" ng-click="modifierMdp()" >Modifier mot de passe</md-button>
+                </div>
+                
+              </form>
+
+
+          </div> 
+     
+        </md-content>
+      </md-tab>
+      
+    </md-tabs>
+  </md-content>
+</div>
+

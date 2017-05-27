@@ -1,0 +1,52 @@
+
+ 
+ <div  ng-cloak>
+   <md-content>
+
+   <md-toolbar  class="md-hue-2">
+      <div class="md-toolbar-tools">
+    
+
+        <h2 flex md-truncate> MyTennis </h2>
+       
+        <md-button  ng-href="/#/" >Accueil 
+        </md-button>
+        <md-button  ng-href="/#/connexionClub">Club
+        </md-button>
+       
+        <md-button class="md-icon-button" ng-href="/#/connexionAdherent" aria-label="More">    
+          <md-icon md-svg-icon="img/icons/launch.svg"></md-icon>
+        </md-button>
+
+      </div>
+    </md-toolbar>
+
+
+
+    <div class="container">
+ <h2>Réservation de terrain de tennis</h2>
+  <p> Réserve ton terrain de Tennis et planifie tes séances d'entrainements </p>
+
+    <form name="projectForm">
+
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input md-maxlength="25" ng-model="user.email" type="email" required>
+        <div ng-messages="projectForm.description.$error">
+          <div ng-message="required">Champ requis</div>
+         <!-- <div ng-message="md-maxlength">The description must be less than 30 characters long.</div> -->
+        </div>
+      </md-input-container>
+
+    
+        <md-button class="md-raised md-primary" type="submit" ng-click="commencer()">Commencer</md-button>
+     
+
+     
+    </form>
+     
+    </div>
+ 
+
+ </md-content>
+</div>
