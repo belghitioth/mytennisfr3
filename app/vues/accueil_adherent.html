@@ -140,6 +140,129 @@
  
         </md-content>
       </md-tab>
+
+<md-tab label="Partenaires">
+        <md-content class="md-padding">
+  
+          
+      
+   
+        <div class="container-fluid" ng-controller="reservationsAdherentCtrl">
+        <h3>Recherche de partenaires</h3>
+
+
+        <md-input-container>
+                  <label>Sexe</label>
+                  <md-select  ng-model="adherent.sexe" required >
+                    <md-option  value="F" >
+                      F
+                    </md-option>
+                    <md-option  value="M" >
+                      M
+                    </md-option>  
+                  </md-select>
+              </md-input-container>
+
+              <md-input-container>
+                  <label>Classement</label>
+                  <md-select  ng-model="adherent.classement" required >
+                    <md-option  value="Non Classé" >
+                      Non Classé
+                    </md-option>
+                    <md-option  value="40" >
+                      40
+                    </md-option>
+                    <md-option  value="30/5" >
+                      30/5
+                    </md-option>
+                    <md-option  value="30/4" >
+                      30/4
+                    </md-option>
+                    <md-option  value="30/3" >
+                      30/3
+                    </md-option>
+                    <md-option  value="30/2" >
+                      30/2
+                    </md-option>
+                    <md-option  value="30/1" >
+                      30/1
+                    </md-option>
+                    <md-option  value="30/0" >
+                      30/0
+                    </md-option>
+                    <md-option  value="15/5" >
+                      15/5
+                    </md-option>
+                    <md-option  value="15/4" >
+                      15/4
+                    </md-option>
+                    <md-option  value="15/3" >
+                      15/3
+                    </md-option>
+                    <md-option  value="15/2" >
+                      15/2
+                    </md-option>
+                    <md-option  value="15/1" >
+                      15/1
+                    </md-option>
+                    <md-option  value="15/0" >
+                      15/0
+                    </md-option> 
+                  </md-select>
+              </md-input-container>
+
+              <md-input-container class="md-block">
+                <label>Année de naissance</label>
+                <input ng-model="adherent.birthday" type="text" required>
+                <div ng-messages="projectForm.description.$error">
+                  <div ng-message="required">Champ requis</div>
+                   </div>
+              </md-input-container>  
+
+              <div>
+                  <md-button class="md-raised md-primary" type="submit" ng-click="trouverPartenaire()">Trouver un partenaire</md-button>
+              </div>    
+
+
+<h3>Partenaires correspondant aux critères</h3>
+
+
+<md-table-container>
+  <table md-table ng-model="selected" md-progress="promise">
+    <thead md-head md-order="query.order" md-on-reorder="getDesserts">
+      <tr md-row>
+        <th md-column md-order-by="nameToLower"><span>Nom</span></th>
+        <th md-column md-order-by="nameToLower"><span>Prénom</span></th>
+        <th md-column md-order-by="nameToLower"><span>Classement</span></th>
+        <th md-column md-order-by="nameToLower"><span>Année de naissance</span></th>
+         <th md-column md-order-by="nameToLower"><span>Téléphone</span></th>
+      </tr>
+    </thead>
+
+    <tbody md-body>
+      <tr md-row   ng-repeat="creneau in creneaux ">
+        <td md-cell>{{adherent.nom}}</td>
+        <td md-cell>{{adherent.prenom}}</td>
+        <td md-cell>{{adherent.classement }}</td>
+        <td md-cell>{{adherent.birthday}}</td>
+        <td md-cell>{{adherent.tel}}</td>
+        <td md-cell ><a ng-click=""  href=""> Annuler </a></td>
+      </tr>    
+    </tbody>
+  </table>
+</md-table-container>
+
+      
+  </div> 
+  
+  
+ 
+        </md-content>
+   </md-tab>
+
+
+
+
       <md-tab label="Mes informations" >
         <md-content class="md-padding">
           <div class="container-fluid" ng-controller="informationsAdherentCtrl"> 
