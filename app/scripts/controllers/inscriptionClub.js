@@ -23,7 +23,6 @@ angular.module('mytennisfr2App')
               nom: nom,
               ville: ville,
               email:email,
-              tel:tel,
               club_active:'non',
               nombre_terrains:0,
               nombre_adherents:0

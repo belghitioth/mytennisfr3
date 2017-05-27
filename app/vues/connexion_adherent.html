@@ -31,7 +31,7 @@
      <md-input-container>
           <label>Choisir Club</label>
           <md-select  ng-model="adherent.club" required >
-            <md-option ng-repeat="club in clubs" ng-value="club.nom" ng-disabled="$index === 0">
+            <md-option ng-repeat="club in clubs" ng-value="club.nom">
               {{club.nom}}
             </md-option>
           </md-select>
@@ -59,8 +59,11 @@
      
     </form>
 
-		 
-			<p> {{log }}</p>
+		 <div ng-if="status" id="status">
+              <b layout="row" layout-align="center center" class="md-padding">
+                {{status}}
+              </b>
+            </div>
       <md-button ng-href="/#/inscriptionAdherent" >S'inscrire</md-button>
 
 			

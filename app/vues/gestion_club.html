@@ -10,7 +10,7 @@
           <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
         </md-button>
 
-        <h2 flex md-truncate> Bonjour {{nom}}</h2>
+        <h2 flex md-truncate> Bonjour {{infos_club.nom}}</h2>
         <md-button  ng-click="deconnecterClub()" >Déconnexion
         </md-button>
  
@@ -28,12 +28,12 @@
   
          
    
-      <h2>Nombre de terrains : {{nb_terrains}}</h2>
+      <h2>Nombre de terrains : {{infos_club.nombre_terrains}}</h2>
           <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
           <br>
 
           <md-table-container>
-  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+  <table md-table md-row-select multiple  md-progress="promise">
     <thead md-head md-order="query.order" md-on-reorder="getDesserts">
       <tr md-row>
         <th md-column md-order-by="nameToLower"><span>Nom</span></th>
@@ -93,14 +93,14 @@
         <div ng-controller="gestionAdherentsCtrl">
         <!-- Début ajout -->
 
-         <h2 class="md-display-2">Nombre d'adhérents : {{nb_adherents}}</h2>
+         <h3 >Nombre d'adhérents : {{infos_club.nombre_adherents}}</h3>
           
           <input type="text" class="form-control" placeholder="Filtrer ..." ng-model="searchText">
         <br>
 
 
   <md-table-container>
-  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+  <table md-table  md-progress="promise">
     <thead md-head md-order="query.order" md-on-reorder="getDesserts">
       <tr md-row>
         <th md-column md-order-by="nameToLower"><span>Nom</span></th>
@@ -115,16 +115,16 @@
       </tr>
     </thead>
     <tbody md-body>
-      <tr md-row md-select="creneau" md-select-id="adherent.nom"  ng-repeat="adherent in adherents| filter:searchText">
+      <tr md-row  ng-repeat="adherent in adherents| filter:searchText">
        <td md-cell>{{adherent.nom}}</td>
         <td md-cell>{{adherent.prenom}}</td>
          <td md-cell>{{adherent.birthday}}</td>
          <td md-cell>{{adherent.email}}</td>
          <td md-cell>{{adherent.adherent_active}}</td>
           <td md-cell ng-show="adherent.adherent_active == 'non'">
-        <a ng-click="activerAdherent(adherent.cid)"  href=""> Activer    
+        <a ng-click="activationAdherent(adherent.cid,adherent.adherent_active)"  href=""> Activer    
         </a> </td>
-         <td md-cell ng-show="adherent.adherent_active == 'oui'"><a ng-click="desactiverAdherent(adherent.cid)"  href=""> Désactiver     
+         <td md-cell ng-show="adherent.adherent_active == 'oui'"><a ng-click="activationAdherent(adherent.cid,adherent.adherent_active)"  href=""> Désactiver     
          </a> </td>
 
         </tr> 
@@ -145,7 +145,7 @@
 
       <md-tab label="Informations Club" >
         <md-content class="md-padding">
-        <div ng-controller="informationsClubCtrl">
+        <div ng-controller="gestionAdherentsCtrl">
 
           <h2>Informations Club </h2>
          <md-table-container>
@@ -153,11 +153,10 @@
  
     <tbody md-body>
  
-         <tr md-row><td md-cell>Nom </td><td md-cell> {{nom}} </td></tr>
-             <tr md-row><td md-cell>Ville </td><td md-cell> {{ville}} </td></tr>
-             <tr md-row><td md-cell>Téléphone </td><td md-cell> {{tel}} </td></tr>
-      <tr md-row><td md-cell>Email </td><td md-cell>{{email}}</td></tr>
-      <tr md-row><td md-cell>Nombre d'adhérents </td><td md-cell>{{nb_adherents}}</td></tr>
+         <tr md-row><td md-cell>Nom </td><td md-cell> {{infos_club.nom}} </td></tr>
+             <tr md-row><td md-cell>Ville </td><td md-cell> {{infos_club.ville}} </td></tr>
+      <tr md-row><td md-cell>Email </td><td md-cell>{{infos_club.email}}</td></tr>
+      <tr md-row><td md-cell>Nombre d'adhérents </td><td md-cell>{{infos_club.nombre_adherents}}</td></tr>
 
           
     

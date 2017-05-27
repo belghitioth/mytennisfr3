@@ -7,30 +7,19 @@ angular.module('mytennisfr2App')
    	function ($scope, $firebaseAuth, $location, $firebaseObject,$rootScope,$firebaseArray,$cookies) {
   	 		
       	var uid=$cookies.get('userId');
-	  	var ref = firebase.database().ref('/clubs/'+uid);
-		var obj = $firebaseObject(ref);
-
-
-
-		obj.$loaded().then(function() {
-	     	angular.forEach(obj, function(value, key) {
-	           	if(key=='nom'){		       		
-		       		$scope.nom = value;
-		       	}	 		       		
-		       	if(key=='nombre_terrains'){
-		       		$scope.nb_terrains= value;		       		
-		       	}			       
-		        
-	       	});
-	       	ref=firebase.database().ref('/clubs/'+uid+'/terrains');
-     		$scope.terrains = $firebaseArray(ref.orderByChild("nom"));
-     		console.log($firebaseArray(ref.orderByChild("nom")));
-     	});
-			
-   	  
+	  	
+		//recupérer infos club
+	    var ref = firebase.database().ref('/clubs/'+uid);
+	    ref.once("value").then(function(snapshot) {
+	            $scope.infos_club=snapshot.val();
+	          });
+  
+       	var ref_terrains=firebase.database().ref('/clubs/'+uid+'/terrains');
+ 		$scope.terrains = $firebaseArray(ref_terrains.orderByChild("nom"));
+     	
 		
-		var auth = $firebaseAuth();
 		$scope.deconnecterClub = function() {
+			var auth = $firebaseAuth();
 			auth.$signOut();
 			 $location.path("/");
     
@@ -49,7 +38,7 @@ angular.module('mytennisfr2App')
 
 	     })
 	       
-}
+		}
 		$scope.supprimerTerrain = function(nom){
 			console.log("ok");
 	      var ref = firebase.database().ref('/clubs/'+uid+'/terrains/');

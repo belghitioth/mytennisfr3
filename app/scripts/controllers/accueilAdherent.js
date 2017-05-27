@@ -9,47 +9,63 @@ angular.module('mytennisfr2App')
    		var uid=$cookies.get('userId');
    		var nomClub=$cookies.get('nomClub');
       $scope.nomClub=nomClub;
+      $scope.infos=[];
 
-   		  
-   		// Récupération des informations liées à l'utilisateur connecté
-   		var recuperer_infos = function(){
+      
+     
 
-	   		var ref_clubs = firebase.database().ref('/clubs/');
-			var obj_clubs = $firebaseObject(ref_clubs);
-			
-			obj_clubs.$loaded().then(function() {
-		     	angular.forEach(obj_clubs, function(value, key) {
-		           	if(value.nom==nomClub){		       			
-			       		$scope.club_id=key;
-			       	}	 		       		   			        
-		       	});
+     
+   		
+    
+      // Récupération des informations liées à l'utilisateur connecté
+   		var recuperer_infos_adherent = function(uid,nomClub,callback){
 
-		       	var ref_terrains=firebase.database().ref('/clubs/'+$scope.club_id+'/terrains');
-	     		$scope.terrains = $firebaseArray(ref_terrains.orderByChild("nom"));
+  	   	var club_id="";
+        var infos=[];
 
-            var ref_adherents=firebase.database().ref('/clubs/'+$scope.club_id+'/adherents');
-          $scope.adherents = $firebaseArray(ref_adherents.orderByChild("nom"));
+        var ref_clubs = firebase.database().ref('/clubs/');
+        var obj_clubs = $firebaseObject(ref_clubs);
+      
+        obj_clubs.$loaded().then(function() {
+            angular.forEach(obj_clubs, function(value, key) {
+                  if(value.nom==nomClub){               
+                  club_id=key;
+                }                               
+              });
 
-	     		var ref_adherent=firebase.database().ref('clubs/'+$scope.club_id+'/adherents/'+uid);
-	     		var obj_adherent=$firebaseObject(ref_adherent);
+          callback(club_id);
+          var ref_adherent=firebase.database().ref('clubs/'+club_id+'/adherents/'+uid);
+          var obj_adherent=$firebaseObject(ref_adherent);
 
-		     	obj_adherent.$loaded().then(function(){
-		     		angular.forEach(obj_adherent, function(value, key){
-		     			if(key=='prenom'){
-		     				$scope.prenom=value;
-		     			}
-              if(key=='nom'){
-                $scope.nom=value;
-              }
-		     			
-		     			
-		     		});
-		     	})
-		     	});
+           ref_adherent.once("value")
+              .then(function(snapshot) {
+                $scope.infos=snapshot.val();
+                $scope.club_id=club_id;
 
+              });    
 
+          });
 			
    		}
+
+
+     
+      // Récupération des données pour remplir le formulaire
+      var recuperer_donnees_formulaire=function(club_id){
+
+        var ref_terrains=firebase.database().ref('/clubs/'+club_id+'/terrains');
+        $scope.terrains = $firebaseArray(ref_terrains.orderByChild("nom"));
+
+        var ref_adherents=firebase.database().ref('/clubs/'+club_id+'/adherents');
+        $scope.adherents = $firebaseArray(ref_adherents.orderByChild("nom"));
+      }
+
+      recuperer_infos_adherent(uid,nomClub,recuperer_donnees_formulaire)
+
+     
+      
+
+
    		$scope.reserver = function(ev){
    			// Recherche id terrain selectionné
    			var ref_terrain=firebase.database().ref('/clubs/'+$scope.club_id+'/terrains');
@@ -145,15 +161,14 @@ angular.module('mytennisfr2App')
       
 			
         });
-            
-
-        
+          
 
    		}
-  	 	recuperer_infos();
-      	
-   	  
-		
+
+    $scope.modifierMdp = function() {
+      $location.path("/modificationMdp");
+    }
+     	 	
 		
 		$scope.deconnecterAdherent = function() {
 			var auth = $firebaseAuth();

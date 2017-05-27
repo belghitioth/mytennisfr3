@@ -7,56 +7,34 @@ angular.module('mytennisfr2App')
    	function ($scope, $firebaseAuth, $location, $firebaseObject,$rootScope,$firebaseArray,$cookies) {
   	 		
     	var uid=$cookies.get('userId');
-	  	var ref = firebase.database().ref('/clubs/'+uid);
-		  var obj = $firebaseObject(ref);
+	  	
 
-      $scope.selected = [];
-  
- 
-  
-
-		obj.$loaded().then(function() {
-	     	angular.forEach(obj, function(value, key) {
-	     		
-	           	if(key=='nom'){		       		
-		       		$scope.nom = value;
-		       	}	 		       		
-		       	if(key=='nombre_adherents'){
-		       		$scope.nb_adherents= value;		       		
-		       	}			       
-		        
-	       	});
-
-	       	var ref_adherents=firebase.database().ref('/clubs/'+uid+'/adherents');
-            $scope.adherents = $firebaseArray(ref_adherents.orderByChild("nom"));
-    console.log($scope.adherents);
-           ref_adherents.once("value")
-          .then(function(snapshot) {
-            $scope.adherents2=snapshot.val();
-             snapshot.forEach(function(childSnapshot) {
-
-
-            console.log(childSnapshot.val());
-           
-            });
-
-
+		  //recupérer infos club
+      var ref = firebase.database().ref('/clubs/'+uid);
+      ref.once("value").then(function(snapshot) {
+            $scope.infos_club=snapshot.val();
           });
+  
 
-       // 
+	     var ref_adherents=firebase.database().ref('/clubs/'+uid+'/adherents');
+        $scope.adherents = $firebaseArray(ref_adherents.orderByChild("nom"));
+  
+         
+    
      	
-     		
-     	});
+   
 			
-   	   $scope.activerAdherent = function(cid) {
+   	   $scope.activationAdherent = function(cid,etat) {
           
         var ref = firebase.database().ref('/clubs/'+uid+'/adherents/');
         var obj = $firebaseObject(ref);
+        var newetat='';
+        etat=='oui'? newetat="non":newetat="oui";
       obj.$loaded().then(function() {
             angular.forEach(obj, function(value, key) {  
             if (key==cid){
               firebase.database().ref('/clubs/'+uid+'/adherents/'+key).update({
-              adherent_active:'oui',
+              adherent_active:newetat,
             });
 
             }                 
@@ -66,30 +44,20 @@ angular.module('mytennisfr2App')
 
     }
 
-      $scope.desactiverAdherent = function(cid) {
-            
-      var ref = firebase.database().ref('/clubs/'+uid+'/adherents/');
-      var obj = $firebaseObject(ref);
-      obj.$loaded().then(function() {
-            angular.forEach(obj, function(value, key) {  
-            if (key==cid){
-              firebase.database().ref('/clubs/'+uid+'/adherents/'+key).update({
-              adherent_active:'non',
-            });
-
-            }                 
-            });
-        });
-
-
-    }
 		
-		var auth = $firebaseAuth();
+		
 		$scope.deconnecterClub = function() {
+      var auth = $firebaseAuth();
 			auth.$signOut();
 			 $location.path("/");
     
 		}
+
+    $scope.modifierMdp = function() {
+      $location.path("/modificationMdpClub");
+    }
+    
+   
 
     $scope.supprimerAdherent = function(cid){
       var ref = firebase.database().ref('/clubs/'+uid+'/adherents/');
@@ -114,43 +82,5 @@ angular.module('mytennisfr2App')
       });
     }
 
-
-		$scope.ajouterAdherent = function() {
-			
-		auth.$createUserWithEmailAndPassword($scope.adherentnew.email,'123456')
-         .then(function(userRecord) {
-        // A UserRecord representation of the newly created user is returned
-
-			console.log("j'ajoute un adhérent");
-			var nb_adherentsnew=$scope.nb_adherents+1;
-			$scope.nb_adherents+=1;
-			firebase.database().ref('/clubs/' +uid).update({
-                nombre_adherents:nb_adherentsnew
-            });
-			firebase.database().ref('/clubs/' +uid+'/adherents/'+userRecord.uid).set({
-                nom:$scope.adherentnew.nom,
-                prenom:$scope.adherentnew.prenom,
-                birthday:$scope.adherentnew.birthday,
-                email:$scope.adherentnew.email,
-                cid:userRecord.uid,
-                adherent_active:"non"
-            });
-    
-		})
-         .catch(function(error) {
-        // Gestion des erreur
-          var errorCode = error.code;         
-          console.log(errorCode);         
-          if(errorCode=='auth/weak-password'){
-            $scope.log="Erreur : Mot de passe à - de 6 caractères";            
-          }
-          else if (errorCode=='auth/email-already-in-use'){      
-            $scope.log="Erreur : Email déjà utilisé";           
-              
-            }       
-          });
-        
-
-     }
 		               
     }]);

@@ -12,18 +12,18 @@ angular.module('mytennisfr2App')
        
 		
 	    var ref = firebase.database().ref('/clubs/');
-	    var nb_clubs=-1;
+	    var nb_clubs=0;
 
     	// Récupération du nombre de clubs
 		var obj = $firebaseObject(ref);
 		obj.$loaded().then(function() {
         	angular.forEach(obj, function(value, key) {    			
-    			nb_clubs+=1;	
-    			console.log(nb_clubs)	;		        
+    			nb_clubs+=1;		        
        		});
+       		$scope.nb_clubs=nb_clubs
        		// Récupération des données des clubs dans un tableau
 	     	$scope.clubs = $firebaseArray(ref);
-		    var query = ref.orderByChild("nom").limitToLast(nb_clubs);
+		    var query = ref.orderByChild("nom");
 		    $scope.filteredClubs = $firebaseArray(query);
 
      	});
@@ -31,33 +31,17 @@ angular.module('mytennisfr2App')
 		
 
 
-	    $scope.activerClub = function(cid) {
-	    		
+	    $scope.activationClub = function(nomClub,etat) {
+	    	
     		var ref = firebase.database().ref('/clubs/');
     		var obj = $firebaseObject(ref);
+    		var newetat='';
+        	etat=='oui'? newetat="non":newetat="oui";
 			obj.$loaded().then(function() {
 	        	angular.forEach(obj, function(value, key) {  
-	    			if (key==cid){
+	    			if (value.nom==nomClub){
 	    				firebase.database().ref('/clubs/'+key).update({
-					  	club_active:'oui',
-					  });
-
-	    			}					        
-	       		});
-	     	});
-
-
-		}
-
-		  $scope.desactiverClub = function(cid) {
-	    			
-		 	var ref = firebase.database().ref('/clubs/');
-		 	var obj = $firebaseObject(ref);
-			obj.$loaded().then(function() {
-	        	angular.forEach(obj, function(value, key) {  
-	    			if (key==cid){
-	    				firebase.database().ref('/clubs/'+key).update({
-					  	club_active:'non',
+					  	club_active:newetat,
 					  });
 
 	    			}					        
@@ -68,8 +52,10 @@ angular.module('mytennisfr2App')
 		}
 
 		  
-		var auth = $firebaseAuth();
+		  
+		
 		$scope.deconnecterAdmin = function() {
+			var auth = $firebaseAuth();
 			auth.$signOut();
 			 $location.path("/");
     
