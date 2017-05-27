@@ -55,8 +55,9 @@ angular.module('mytennisfr2App')
          var currentPassword = $scope.adherent.oldMdp;
          var newPassword = $scope.adherent.newMdp ;
          var newPassword2 = $scope.adherent.newMdp2;
-         
+         console.log(currentPassword);
          firebase.auth().signInWithEmailAndPassword(email, currentPassword).then(function(){
+
               var user = firebase.auth().currentUser;
          
               if (newPassword==newPassword2){
@@ -74,7 +75,7 @@ angular.module('mytennisfr2App')
                     });
                }
                else {
-                $scope.log='  Modification impossible: Les deux champs Nouveau Mot de Passe ne sont pas identiques';
+                $scope.log='  Modification impossible: Les deux champs "Nouveau Mot de Passe" ne sont pas identiques';
                 
                }
          })

@@ -19,6 +19,48 @@
 	<div class="container-fluid" ng-controller="modificationMdpCtrl">			
 		<h1>Modification du Mot de passe </h1>
 
+			<form name="projectform">
+
+					  <md-input-container class="md-block">
+				        <label>Email</label>
+				        <input ng-model="adherent.email" type="email" required>
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				           </div>
+				      </md-input-container>
+
+					  <md-input-container class="md-block">
+				        <label>Ancien Mot de passe</label>
+				        <input ng-model="adherent.oldMdp" type="password" >
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				          </div>
+				      </md-input-container>
+
+					  <md-input-container class="md-block">
+				        <label>Nouveau Mot de passe</label>
+				        <input ng-model="adherent.newMdp" type="password" >
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				          </div>
+				      </md-input-container>
+
+				      <md-input-container class="md-block">
+				        <label>Confirmer nouveau Mot de passe</label>
+				        <input ng-model="adherent.newMdp2" type="password" >
+				        <div ng-messages="projectForm.description.$error">
+				          <div ng-message="required">Champ requis</div>
+				          </div>
+				      </md-input-container>
+
+				      <div>
+       					 <md-button class="md-raised md-primary" type="submit" ng-click="modifier()">Modifier le Mot de passe</md-button>
+      				  </div>
+
+      		</form>
+<!--
+			</form>
+
 		  	<form role="form"  >
 			  	<div class="input-group">
 	   		  		<input type="password" class="form-control" ng_model= "adherent.oldMdp" placeholder="Ancien Mot de passe" required  />
@@ -27,7 +69,6 @@
 				    <input type="submit" class="form-control" ng-click="modifier()" value="Modifier le Mot de passe"  	/>
 				</div>		
 			</form>
-			
+-->			
+		<p> {{log }}</p>
 	</div> </div>
-			
-		

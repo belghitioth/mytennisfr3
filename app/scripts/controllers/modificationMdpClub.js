@@ -51,10 +51,10 @@ angular.module('mytennisfr2App')
 
          
 
-	       var email = $scope.adherent.email;
-         var currentPassword = $scope.adherent.oldMdp;
-			   var newPassword = $scope.adherent.newMdp ;
-         var newPassword2 = $scope.adherent.newMdp2;
+	       var email = $scope.club.email;
+         var currentPassword = $scope.club.oldMdp;
+			   var newPassword = $scope.club.newMdp ;
+         var newPassword2 = $scope.club.newMdp2;
          
          firebase.auth().signInWithEmailAndPassword(email, currentPassword).then(function(){
               var user = firebase.auth().currentUser;
