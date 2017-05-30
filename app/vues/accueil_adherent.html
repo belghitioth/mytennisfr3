@@ -142,17 +142,15 @@
       </md-tab>
       <md-tab label="Partenaires">
               <md-content class="md-padding">
-        
-                
-            
+                   
          
-              <div class="container-fluid" ng-controller="reservationsAdherentCtrl">
+              <div class="container-fluid" ng-controller="partenairesCtrl">
               <h3>Recherche de partenaires</h3>
 
 
               <md-input-container>
                         <label>Sexe</label>
-                        <md-select  ng-model="adherent.sexe" required >
+                        <md-select  ng-model="demande.sexe" required >
                           <md-option  value="F" >
                             F
                           </md-option>
@@ -164,7 +162,7 @@
 
                     <md-input-container>
                         <label>Classement</label>
-                        <md-select  ng-model="adherent.classement" required >
+                        <md-select  ng-model="demande.classement" required >
                           <md-option  value="Non Classé" >
                             Non Classé
                           </md-option>
@@ -212,7 +210,7 @@
 
                     <md-input-container class="md-block">
                       <label>Année de naissance</label>
-                      <input ng-model="adherent.birthday" type="text" required>
+                      <input ng-model="demande.birthday" type="text" required>
                       <div ng-messages="projectForm.description.$error">
                         <div ng-message="required">Champ requis</div>
                          </div>
@@ -239,7 +237,7 @@
           </thead>
 
           <tbody md-body>
-            <tr md-row   ng-repeat="creneau in creneaux ">
+            <tr md-row   ng-repeat="adherent in partenaires ">
               <td md-cell>{{adherent.nom}}</td>
               <td md-cell>{{adherent.prenom}}</td>
               <td md-cell>{{adherent.classement }}</td>
