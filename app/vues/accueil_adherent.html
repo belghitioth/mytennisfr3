@@ -150,7 +150,8 @@
 
               <md-input-container>
                         <label>Sexe</label>
-                        <md-select  ng-model="demande.sexe" required >
+                       
+                        <md-select  ng-model="demande.sexe"  >
                           <md-option  value="F" >
                             F
                           </md-option>
@@ -162,9 +163,10 @@
 
                     <md-input-container>
                         <label>Classement</label>
-                        <md-select  ng-model="demande.classement" required >
-                         <md-option  value="" >
-                           
+                        <md-select  ng-model="demande.classement"  >
+                    
+                        <md-option  value="Non Classé" >
+                           Non Classé
                           </md-option>
                          
                           <md-option  value="40" >
@@ -211,10 +213,8 @@
 
                     <md-input-container class="md-block">
                       <label>Année de naissance</label>
-                      <input ng-model="demande.birthday" type="text" required>
-                      <div ng-messages="projectForm.description.$error">
-                        <div ng-message="required">Champ requis</div>
-                         </div>
+                      <input ng-model="demande.birthday" type="text" >
+                     
                     </md-input-container>  
 
                     <div>
