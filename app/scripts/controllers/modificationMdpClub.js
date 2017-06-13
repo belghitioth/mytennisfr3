@@ -8,6 +8,7 @@ angular.module('mytennisfr2App')
         // Récupération de l'identifiant de l'utilisateur connecté
       var uid=$cookies.get('userId');
       var nomClub=$cookies.get('nomClub');
+      $scope.nom=nomClub;
 
       // Récupération des informations liées à l'utilisateur connecté
       var recuperer_infos = function(){
