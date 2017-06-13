@@ -30,6 +30,11 @@ angular.module('mytennisfr2App')
 
       
       }
+      recuperer_infos();
+
+       $scope.retour= function() {      
+      $location.path("/accueilAdherent");    
+    }
       
       var recuperer_infos_user = function(club_id,user_id){
           var ref_adherent=firebase.database().ref('clubs/'+club_id+'/adherents/'+user_id);
