@@ -11,6 +11,11 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
     var uid=$cookies.get('userId'); 
     var terrainId=$cookies.get('terrain_id');
 
+     var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+
       $scope.retour= function() {      
       $location.path("/gestionClub");    
     }
@@ -49,14 +54,24 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
 
 
     };
-    
+
+
 
 
     var recuperer_creneaux = function(club_id,terrain_id){
         var ref_creneaux = firebase.database().ref('/clubs/'+club_id+'/creneaux');
         $scope.creneaux={};
-        $scope.events=[];
 
+        var date = new Date();
+        var d = date.getDate();
+        var m = date.getMonth();
+        var y = date.getFullYear();
+        //event source that contains custom events on the scope 
+      $scope.events = [
+        {id: 999,title: 'Martin Favreau vs Othmane ELBELGHITI',start: new Date(y, m, d - 3, 16, 0),allDay: false},
+        {id: 999,title: 'Martin Favreau vs Antoine Jean',start: new Date(y, m, d + 4, 16, 0),allDay: false},
+        {title: 'Martin Favreau vs Benjamin ALMEIDA',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+       ]; 
         ref_creneaux.once("value")
           .then(function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
@@ -77,7 +92,7 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
                 }
                 // Fin conversion
                 
-                
+                console.log("ok");
                 $scope.events.push({title :childSnapshot.val()['intitule'],
                   start: new Date(start_tableau[0], start_tableau[1]-1, start_tableau[2],start_tableau[3], start_tableau[4]),
                    end: new Date(end_tableau[0], end_tableau[1]-1, end_tableau[2], end_tableau[3],end_tableau[4]),
@@ -93,6 +108,8 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
        
     
       };
+
+
 
 
 
@@ -116,10 +133,6 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
     }
 
 
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
    
   
 
@@ -130,13 +143,9 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
             className: 'gcal-event',           // an option!
             currentTimezone: 'Europe/Paris' // an option!
     };
-    /* event source that contains custom events on the scope 
-      $scope.events = [
-        {id: 999,title: 'Entrainement',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-        {id: 999,title: 'Entrainement 2',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-        {title: 'Créneau Michel',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-        {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-        ]; */
+
+    
+    
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, timezone, callback) {
       var s = new Date(start).getTime() / 1000;
@@ -251,8 +260,8 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
         $scope.changeTo = 'Hungarian';
       }
     };
-    /* event sources array*/
+  
     $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-    $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
+$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 });
 /* EOF */
