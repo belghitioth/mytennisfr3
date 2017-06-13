@@ -17,6 +17,7 @@ angular
     'ui.calendar',
     'moment-picker',
     'md.data.table',
+    'ui.bootstrap',
    
    
   ])

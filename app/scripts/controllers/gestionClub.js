@@ -44,7 +44,7 @@ angular.module('mytennisfr2App')
 	      var ref = firebase.database().ref('/clubs/'+uid+'/terrains/');
 	      var obj = $firebaseObject(ref);
 	      
-	      var nb_terrainsnew=$scope.nb_terrains;
+	      var nb_terrainsnew=$scope.infos_club.nombre_terrains;
 	      nb_terrainsnew=nb_terrainsnew-1;
 	      
 	      firebase.database().ref('/clubs/' +uid).update({
@@ -52,7 +52,7 @@ angular.module('mytennisfr2App')
 	                nombre_terrains:nb_terrainsnew
 
 	            });
-	      $scope.nb_terrains=nb_terrainsnew;
+	      $scope.infos_club.nombre_terrains=nb_terrainsnew;
 	      obj.$loaded().then(function() {
 	            angular.forEach(obj, function(value, key) {  
 	              if (value.nom==nom){
@@ -66,8 +66,8 @@ angular.module('mytennisfr2App')
 
 		
 		$scope.ajouterTerrain = function() {
-			var nb_terrainsnew=$scope.nb_terrains+1;
-			$scope.nb_terrains+=1;
+			var nb_terrainsnew=$scope.infos_club.nombre_terrains+1;
+			$scope.infos_club.nombre_terrains+=1;
 			firebase.database().ref('/clubs/' +uid).update({
                 nombre_terrains:nb_terrainsnew
             });
