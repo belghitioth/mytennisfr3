@@ -61,6 +61,7 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
     var recuperer_creneaux = function(club_id,terrain_id){
         var ref_creneaux = firebase.database().ref('/clubs/'+club_id+'/creneaux');
         $scope.creneaux={};
+        console.log("terrain_id",terrain_id)
 
         var date = new Date();
         var d = date.getDate();
@@ -68,13 +69,11 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
         var y = date.getFullYear();
         //event source that contains custom events on the scope 
       $scope.events = [
-        {id: 999,title: 'Martin Favreau vs Othmane ELBELGHITI',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-        {id: 999,title: 'Martin Favreau vs Antoine Jean',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-        {title: 'Martin Favreau vs Benjamin ALMEIDA',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-       ]; 
+         ]; 
         ref_creneaux.once("value")
           .then(function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
+                console.log("terrain",childSnapshot.val()['terrain_id'])
               
                 if(childSnapshot.val()['terrain_id']==terrain_id)
                 {
@@ -92,11 +91,14 @@ mytennisfr2.controller('gestionPlanningClubCtrl',
                 }
                 // Fin conversion
                 
-                console.log("ok");
-                $scope.events.push({title :childSnapshot.val()['intitule'],
-                  start: new Date(start_tableau[0], start_tableau[1]-1, start_tableau[2],start_tableau[3], start_tableau[4]),
-                   end: new Date(end_tableau[0], end_tableau[1]-1, end_tableau[2], end_tableau[3],end_tableau[4]),
-                  allDay: false });
+               console.log(start_tableau);
+                // $scope.events.push({title :childSnapshot.val()['intitule'],
+                //   start: new Date(start_tableau[0], start_tableau[1]-1, start_tableau[2],start_tableau[3], start_tableau[4]),
+                //    end: new Date(end_tableau[0], end_tableau[1]-1, end_tableau[2], end_tableau[3],end_tableau[4]),
+                //   allDay: false });
+                // }
+                 $scope.events.push({title :childSnapshot.val()['intitule'],
+                  start:new Date(y, start_tableau[2]-1, start_tableau[1], start_tableau[3], start_tableau[4]),end: new Date(y, end_tableau[2]-1, end_tableau[1], end_tableau[3],end_tableau[4]),allDay: false });
                 }
             });
           
